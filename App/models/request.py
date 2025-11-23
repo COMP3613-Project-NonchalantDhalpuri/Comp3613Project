@@ -7,7 +7,7 @@ class Request(db.Model):
     staff_id = db.Column(db.Integer, db.ForeignKey('staff.id'), nullable = True)
     hours = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(20), nullable=False, default='pending')
-    title = db.Colum(db.String(100), nullable = False)
+    title = db.Column(db.String(100), nullable = False)
     description = db.Column(db.Text, nullable = True)
     date_created = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
     date_updated = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp(),
