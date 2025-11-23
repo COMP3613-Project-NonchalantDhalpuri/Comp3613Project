@@ -1,17 +1,17 @@
-from App.models import User,Request,LoggedHours
+from App.models import User
 from App.database import db
 
-def create_user(username, password, email):
-    newuser = User(username=username, password=password, email=email)
+def create_user(name, password, email):
+    newuser = User(name=name, password=password, email=email)
     db.session.add(newuser)
     db.session.commit()
     return newuser
 
-def get_user_by_username(username):
-    result = db.session.execute(db.select(User).filter_by(username=username))
+def get_user_by_name(name):
+    result = db.session.execute(db.select(User).filter_by(name=name))
     return result.scalar_one_or_none()
 
-def get_user(id):
+def get_user_by_id(id):
     return db.session.get(User, id)
 
 def get_all_users():
@@ -25,40 +25,10 @@ def get_all_users_json():
     return users
 
 def update_user(id, username):
-    user = get_user(id)
+    user = get_user_by_id(id)
     if user:
         user.username = username
         # user is already in the session; no need to re-add
         db.session.commit()
         return True
     return None
-
-def view_leaderboard():
-    from App.models.student import Student
-    students = db.session.scalars(db.select(Student)).all()
-    leaderboard = []
-    for student in students:
-        total_hours = sum(lh.hours for lh in student.loggedhours if lh.status == 'approved')
-        leaderboard.append({
-            'student_id': student.student_id,
-            'username': student.username,
-            'total_approved_hours': total_hours
-        })
-    leaderboard.sort(key=lambda x: x['total_approved_hours'], reverse=True)
-    return leaderboard
-
-def get_all_requests_json():
-    
-    requests = Request.query.all()
-    if not requests:
-        return []
-    requests = [req.get_json() for req in requests]
-    return requests
-
-def get_all_logged_hours_json():
-    
-    logs = LoggedHours.query.all()
-    if not logs:
-        return []
-    logs = [log.get_json() for log in logs]
-    return logs
