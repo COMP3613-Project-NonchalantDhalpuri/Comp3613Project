@@ -22,6 +22,7 @@ class ApproveRequestCommand(Command):
         activity = ActivityHistory(
             student_id=self.student.student_id,
             staff_id=self.request.staff_id,
+            request_id = self.request_id,
             title=self.request.title,
             hours=self.request.hours,
             action='approved request',
@@ -41,6 +42,7 @@ class DenyRequestCommand(Command):
         activity = ActivityHistory(
             student_id=self.student.student_id,
             staff_id=self.request.staff_id,
+            request_id = self.request_id,
             title=self.request.title,
             hours=self.request.hours,
             action='denied request',
