@@ -20,7 +20,7 @@ class ApproveRequestCommand(Command):
         self.student.hoursAccumulated += self.request.hours
 
         activity = ActivityHistory(
-            student_id=self.student.student_id,
+            student_id=self.student.id,
             staff_id=self.request.staff_id,
             request_id = self.request_id,
             title=self.request.title,
@@ -40,7 +40,7 @@ class DenyRequestCommand(Command):
         self.request.status = 'denied'
 
         activity = ActivityHistory(
-            student_id=self.student.student_id,
+            student_id=self.student.id,
             staff_id=self.request.staff_id,
             request_id = self.request_id,
             title=self.request.title,
@@ -55,7 +55,7 @@ class DenyRequestCommand(Command):
 class LogHoursCommand(Command):
     def __init__(self, student, staff_id, title, hours, description=None):
         self.student = student
-        self.staff = staff_id
+        self.staff_id = staff_id
         self.title = title
         self.hours = hours
         self.description = description
@@ -63,7 +63,7 @@ class LogHoursCommand(Command):
     def execute(self):
         self.student.hoursAccumulated += self.hours
         activity = ActivityHistory(
-            student_id=self.student.student_id,
+            student_id=self.student.id,
             staff_id=self.staff_id,
             title=self.title,
             hours=self.hours,
@@ -72,3 +72,5 @@ class LogHoursCommand(Command):
         )
         db.session.add(activity)
         db.session.commit()
+
+        return activity 
