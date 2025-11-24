@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&display=swap");
+  </style>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: "Arial", sans-serif;
+    }
+    .flash-container {
+      position: fixed;
+      align-items: center;
+      top: 50px;
+      left: 33%;
+    }
+    .flash-message {
+      width: 500px;
+      height: 70px;
+      position: relative;
+      padding-right: 40px;
+      font-size: large;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 10px;
+      top: 8px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .close-btn:hover {
+      opacity: 0.7;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 500px;
+      width: 900px;
+      position: absolute;
+      top: 20%;
+      left: 22%;
+      padding: 20px;
+      border-radius: 20px;
+      background: #c6c2ff;
+      background: linear-gradient(
+        209deg,
+        rgba(198, 194, 255, 1) 0%,
+        rgba(164, 190, 224, 0.78) 52%,
+        rgba(177, 240, 252, 1) 100%
+      );
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+        rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+    .welcome-text {
+      font-size: 2.5em;
+      font-family: "Expletus Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: italic;
+      padding: 20px;
+      color: white;
+    }
+    .loginForm-container {
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(0, 0, 0, 0.4);
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+      border-radius: 20px;
+    }
+    .login-buttons {
+      display: flex;
+      gap: 0;
+      padding: 0;
+      margin-left: 20px;
+    }
+    .change-button {
+      background-color: #6200ea;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px 10px 0px 0px;
+      margin-right: 5px;
+      cursor: pointer;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
+    .loginForm {
+      color: white;
+    }
+  </style>
+  <body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div id="flash-container" class="flash-container">
+      {% for msg in messages %}
+      <div class="card-panel red lighten-2 white-text flash-message">
+        {{ msg }}
+        <span class="close-btn" onclick="this.parentElement.remove()">×</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+    <div class="container" id="content">
+      <div class="welcome-text">Welcome!</div>
+      <div class="login-buttons">
+        <div class="change-button" id="studentBtn">Student</div>
+        <div class="change-button" id="staffBtn">Staff</div>
+      </div>
+      <div class="loginForm-container">
+        <form
+          id="loginForm"
+          method="POST"
+          action="/login/student"
+          style="padding: 1em"
+        >
+          <div class="row">
+            <div class="input-field col s12">
+              <input
+                placeholder="Student Name"
+                id="name"
+                name="name"
+                type="text"
+                class="validate"
+                style="color: white"
+              />
+              <label for="name"></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input
+                placeholder="Student Password"
+                name="password"
+                id="password"
+                type="password"
+                class="validate"
+                style="color: white"
+              />
+              <label for="password"></label>
+            </div>
+          </div>
+          <div class="row justify-content">
+            <div class="col s4 card-action">
+              <input type="submit" class="blue text-white btn" value="Login" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    const form = document.getElementById("loginForm");
+    const username = document.getElementById("name");
+    const password = document.getElementById("password");
+
+    document.getElementById("studentBtn").addEventListener("click", () => {
+      username.placeholder = "Student Name";
+      password.placeholder = "Student Password";
+      form.action = "/login/student";
+    });
+
+    document.getElementById("staffBtn").addEventListener("click", () => {
+      username.placeholder = "Staff Name";
+      password.placeholder = "Staff Password";
+      form.action = "/login/staff";
+    });
+
+    setTimeout(() => {
+      document.querySelectorAll(".flash-message").forEach((msg) => {
+        msg.style.transition = "opacity 0.5s";
+        msg.style.opacity = 0;
+        setTimeout(() => msg.remove(), 500);
+      });
+    }, 5000);
+  </script>
+</html>
