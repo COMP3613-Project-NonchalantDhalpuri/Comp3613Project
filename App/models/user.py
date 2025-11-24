@@ -4,7 +4,7 @@ from App.database import db
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    username =  db.Column(db.String(20), nullable=False, unique=True)
+    name =  db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)
     email = db.Column(db.String(256), nullable=False)
     role= db.Column(db.String(256),nullable=False, default="user")  #Create role column to distinguish user types
@@ -14,8 +14,8 @@ class User(db.Model):
         "polymorphic_identity": "user"
     }
 
-    def __init__(self, username, email,password,role):
-        self.username = username
+    def __init__(self, name, email,password,role):
+        self.name = name
         self.role=role
         self.set_password(password)
         self.email= email

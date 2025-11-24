@@ -30,16 +30,12 @@ def initialize_db(drop_first=True):
         ("mlee", "mr.lee@gmail.com", "staffpass3"),
     ]
 
-    students = []
     for name, email, pwd in students_data:
         s = Student(name=name, email=email, password=pwd)
-        students.append(s)
         db.session.add(s)
 
-    staff_members = []
     for name, email, pwd in staff_data:
         st = Staff(name=name, email=email, password=pwd)
-        staff_members.append(st)
         db.session.add(st)
 
     db.session.commit()
