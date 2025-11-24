@@ -34,3 +34,21 @@ def get_leaderboard():
     ).all()
 
 
+def get_student_accolades(student_id):
+    student = get_student_by_id(student_id)
+    if not student:
+        return(f"Student with id {student_id} not found.")
+    
+    return student.accolades
+
+
+def get_next_milestone(student_id):
+    student = get_student_by_id(student_id)
+    if not student:
+        return None
+    
+    milestones = [10, 25, 50]
+    for milestone in milestones:
+        if student.hoursAccumulated < milestone:
+            return milestone
+    return None
