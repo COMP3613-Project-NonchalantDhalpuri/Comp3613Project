@@ -109,7 +109,7 @@
                 <small>Achieved: {{ m.achieved_at.strftime('%d %b %Y') }}</small>
               {% endif %}
               <div>
-                <a href="{{ url_for('student_accolades', milestone_id=m.id) }}">
+                <a href="{{ url_for('index_views.student_accolades_page', milestone_id=m.id) }}">
                   View details
                 </a>
               </div>
@@ -160,7 +160,7 @@
         <div class="inner-panel">
           {% if awarded_accolades %}
             {% for a in awarded_accolades %}
-              <a href="{{ url_for('student_accolades', accolade_id=a.id) }}"
+              <a href="{{ url_for('index_views.student_accolades_page', accolade_id=a.id) }}"
                  title="{{ a.name }}">
                 <span class="badge-circle"></span>
               </a>
