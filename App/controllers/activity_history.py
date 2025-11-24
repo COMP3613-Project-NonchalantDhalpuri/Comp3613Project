@@ -26,7 +26,14 @@ def log_hours(staff_id, student_id, hours, title, activity_description=None):
     if not student:
         raise ValueError(f"Student with id {student_id} not found.")
     
-    log_command = LogHoursCommand(student_id, staff_id, title, hours, activity_description)
+    # Pass the STUDENT OBJECT, not the id string
+    log_command = LogHoursCommand(
+        student=student,
+        staff_id=staff_id,
+        title=title,
+        hours=hours,
+        description=activity_description
+    )
     log_entry = log_command.execute()
-    
     return log_entry
+
