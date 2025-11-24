@@ -1,11 +1,20 @@
-from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash, redirect, url_for
-from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request
+from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash, url_for
+from flask_jwt_extended import (
+    get_jwt_identity,
+    verify_jwt_in_request,
+    jwt_required,
+    current_user
+)
 from jwt import ExpiredSignatureError
 
-from App.controllers import create_user, initialize            
-from App.controllers.student import get_student_by_id          
+from App.controllers import create_user, initialize
+from App.controllers.student import (
+    get_student_by_id,
+    get_student_accolades,
+    get_next_milestone
+)
 from App.controllers.activity_history import log_hours
-from App.controllers.request import create_request, get_requests_by_student         
+from App.controllers.request import create_request, get_requests_by_student
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
@@ -137,4 +146,32 @@ def staff_home_page():
         'staff_home.html',
         active_tab='home',
         selected_student=selected_student
+    )
+
+
+@index_views.route('/student/accolades', methods=['GET'])
+@jwt_required()
+def student_accolades_page():
+    student = get_student_by_id(current_user.id)
+    recent_milestones = get_student_accolades(current_user.id)
+    next_milestone = get_next_milestone(current_user.id)
+
+    if next_milestone:
+        progress_percent = (student.hoursAccumulated / next_milestone) * 100
+        if progress_percent > 100:
+            progress_percent = 100
+    else:
+        progress_percent = 100
+
+    selected_milestone = recent_milestones[0] if recent_milestones else None
+    awarded_accolades = recent_milestones
+
+    return render_template(
+        'student_accolades.html',
+        student=student,
+        recent_milestones=recent_milestones,
+        next_milestone=next_milestone,
+        progress_percent=progress_percent,
+        selected_milestone=selected_milestone,
+        awarded_accolades=awarded_accolades,
     )

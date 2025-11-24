@@ -23,3 +23,5 @@ class Student(User):
             'username': self.username,
             'email': self.email
         }
+    
+    

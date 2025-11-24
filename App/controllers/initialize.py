@@ -34,6 +34,7 @@ def initialize_db(drop_first=True):
         s = Student(name=name, email=email, password=pwd)
         db.session.add(s)
 
+
     for name, email, pwd in staff_data:
         st = Staff(name=name, email=email, password=pwd)
         db.session.add(st)
