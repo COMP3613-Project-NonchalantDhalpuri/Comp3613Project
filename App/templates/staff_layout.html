@@ -1,0 +1,46 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Staff {% endblock %}
+
+{% block navbar %}
+<nav class="blue darken-2">
+  <div class="nav-wrapper">
+  
+    <a href="#!" class="brand-logo left" style="margin-left: 15px;">
+      Welcome {{ current_user.staff_id if current_user else "StaffID" }}!
+    </a>
+
+ 
+    <ul id="nav-mobile" class="right">
+      <li>
+        <a href="{{ url_for('staff_home') }}"
+           {% if active_tab == 'home' %}class="white-text text-darken-4"{% endif %}>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('staff_requests') }}"
+           {% if active_tab == 'requests' %}class="white-text text-darken-4"{% endif %}>
+          Requests
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('staff_leaderboards') }}"
+           {% if active_tab == 'leaderboards' %}class="white-text text-darken-4"{% endif %}>
+          Leaderboards
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('staff_student_hours') }}"
+           {% if active_tab == 'student_hours' %}class="white-text text-darken-4"{% endif %}>
+          Student Hours
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('auth.logout') }}">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
