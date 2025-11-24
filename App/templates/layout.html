@@ -1,55 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
 
-  
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block styles %}{% endblock %}
+    <style>
+      #alert {
+        width: 80vw;
+        height: 50px;
+        padding: 15px;
+        right: 10vw;
+        line-height: 20px;
+        border-radius: 4px;
+        top: 90px;
+        position: absolute;
+        z-index: 10;
+      }
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{% block title %}{% endblock %}</title>
+      #close {
+        font-size: 25px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    {% block navbar %}
+    <nav class="blue">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center"
+          >{% block page %}{% endblock %}</a
+        >
+        {% block link %}{% endblock %}
+      </div>
+    </nav>
+    {% endblock %}
 
-  <style>
-  {% block styles %}{% endblock %}
+    <div id="content">{% block content %}{% endblock %}</div>
 
-    #alert{
-      width: 80vw;
-      height: 50px;
-      padding: 15px;
-      right: 10vw;
-      line-height: 20px;
-      border-radius: 4px;
-      top: 90px;
-      position: absolute;
-      z-index: 10;
-    }
-
-    #close{
-      font-size: 25px;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-  </style>
-
-</head>
-<body>
-
-  
-  {% block navbar %}
-  <nav class="blue">
-    <div class="nav-wrapper">
-      <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
-      {% block link %}{% endblock %}
-    </div>
-  </nav>
-  {% endblock %}
-
-  <div id="content">
-    {% block content %}{% endblock %}
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% block scripts %}{% endblock %}
+  </body>
 </html>

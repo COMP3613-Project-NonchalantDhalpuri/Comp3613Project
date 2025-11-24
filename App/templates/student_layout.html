@@ -14,31 +14,31 @@
     
     <ul id="nav-mobile" class="right">
       <li>
-        <a href="{{ url_for('student_home') }}"
+        <a href="{{ url_for('index_views.student_home_page') }}"
            {% if active_tab == 'home' %}class="white-text text-darken-4"{% endif %}>
           Home
         </a>
       </li>
       <li>
-        <a href="{{ url_for('student_leaderboards') }}"
+        <a href="#"
            {% if active_tab == 'leaderboards' %}class="white-text text-darken-4"{% endif %}>
           Leaderboards
         </a>
       </li>
       <li>
-        <a href="{{ url_for('student_accolades') }}"
+        <a href="#"
            {% if active_tab == 'accolades' %}class="white-text text-darken-4"{% endif %}>
           Accolades
         </a>
       </li>
       <li>
-        <a href="{{ url_for('student_history') }}"
+        <a href="#"
            {% if active_tab == 'history' %}class="white-text text-darken-4"{% endif %}>
           History
         </a>
       </li>
       <li>
-        <a href="{{ url_for('auth.logout') }}">Log Out</a>
+        <a href="{{ url_for('auth_views.logout_action') }}">Log Out</a>
       </li>
     </ul>
   </div>

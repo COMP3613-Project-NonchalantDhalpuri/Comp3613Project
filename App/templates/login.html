@@ -99,11 +99,24 @@
       background-color: #6200ea;
       color: white;
       padding: 10px 20px;
-      border-radius: 10px 10px 0px 0px;
+      border-radius: 20px 20px 0px 0px;
       margin-right: 5px;
       cursor: pointer;
       box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
         rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
+    .change-button-active {
+      background-color: #3700b3;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px 20px 0px 0px;
+      margin-right: 5px;
+      cursor: pointer;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
+    .change-button:hover {
+      background-color: #3700b3;
     }
     .loginForm {
       color: white;
@@ -123,7 +136,7 @@
     <div class="container" id="content">
       <div class="welcome-text">Welcome!</div>
       <div class="login-buttons">
-        <div class="change-button" id="studentBtn">Student</div>
+        <div class="change-button-active" id="studentBtn">Student</div>
         <div class="change-button" id="staffBtn">Staff</div>
       </div>
       <div class="loginForm-container">
@@ -172,14 +185,20 @@
     const form = document.getElementById("loginForm");
     const username = document.getElementById("name");
     const password = document.getElementById("password");
+    const studentBtn = document.getElementById("studentBtn");
+    const staffBtn = document.getElementById("staffBtn");
 
     document.getElementById("studentBtn").addEventListener("click", () => {
+      studentBtn.className = "change-button-active";
+      staffBtn.className = "change-button";
       username.placeholder = "Student Name";
       password.placeholder = "Student Password";
       form.action = "/login/student";
     });
 
     document.getElementById("staffBtn").addEventListener("click", () => {
+      staffBtn.className = "change-button-active";
+      studentBtn.className = "change-button";
       username.placeholder = "Staff Name";
       password.placeholder = "Staff Password";
       form.action = "/login/staff";
