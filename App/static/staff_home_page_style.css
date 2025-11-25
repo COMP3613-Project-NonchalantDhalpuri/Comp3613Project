@@ -1,0 +1,214 @@
+/* GLOBAL -------------------------------------------------------- */
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(180deg, #f6fff9 0%, #edf5f0 100%);
+    font-family: "Quicksand", system-ui, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", sans-serif;
+    color: #1b4332;
+    overflow-x: hidden;
+    overflow-y: hidden; 
+}
+
+/* STAFF NAVBAR -------------------------------------------------- */
+
+.staff-nav {
+    background-color: #a8e6cf;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.staff-nav .staff-brand {
+    margin-left: 15px;
+    font-weight: 600;
+    color: #1b4332;
+}
+
+.staff-nav a {
+    color: #1b4332;
+    font-weight: 500;
+}
+
+.staff-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.staff-nav .active-tab {
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+}
+
+/* STAFF HOME LAYOUT ---------------------------------- */
+
+.staff-page {
+    max-width: 1400px;
+    margin: 70px auto 40px auto; 
+    padding: 0 60px;
+}
+
+
+.staff-main {
+    min-height: calc(100vh - 160px); 
+    display: flex;
+    flex-direction: column;
+}
+
+.staff-header h4 {
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    color: #1b4332;
+}
+
+.staff-header p {
+    margin: 0 0 32px 0;
+    color: #4f6f52;
+    font-size: 0.95rem;
+}
+
+/* TWO CARDS SIDE-BY-SIDE ---------------------- */
+
+.staff-forms-row {                         
+    display: flex;
+    flex-direction: row;
+    gap: 60px;                       
+}
+
+.staff-form-col {
+    flex: 1.3;                                     
+}
+
+.staff-form-col .staff-card {
+    flex: 1;
+}
+
+/* CARD STYLE -------------------------------------------- */
+
+.staff-card.card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+    align-items: center;
+}
+
+.staff-card .card-content {
+    padding: 22px 28px 22px;
+}
+
+.staff-card .card-title {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    padding-bottom: 25px;
+    font-weight: 400;
+    letter-spacing: 0.01px;
+}
+
+/* LEFT SUMMARY BOX ----------------------------------- */
+
+.staff-summary {
+    background-color: #f0faf3;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-top: 18px;
+    font-size: 0.95rem;
+}
+
+.staff-summary-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.staff-empty-state {
+    color: #7b8b80;
+    font-style: italic;
+}
+
+/* BUTTONS ------------------------------- */
+
+.btn.staff-btn-secondary {
+    background-color: #e2f4ea;
+    color: #1b4332;
+}
+
+.btn.staff-btn-secondary:hover {
+    background-color: #cce9d9;
+}
+
+.btn.staff-btn-primary {
+    background-color: #95d5b2;
+    color: #ffffff;
+}
+
+.btn.staff-btn-primary:hover {
+    background-color: #74c69d;
+}
+
+
+/* FORM ---------------------- */
+
+.staff-form-actions {
+    margin-top: 16px;
+}
+
+/* FLASH MESSAGES ------------------------- */
+
+.staff-flash-success {
+    background-color: #e3f9e5 !important;
+    color: #1b4332 !important;
+}
+
+.staff-flash-error {
+    background-color: #ffe3e3 !important;
+    color: #842029 !important;
+}
+
+@media (max-width: 992px) {
+    .staff-page {
+        margin-top: 40px;
+        padding: 0 20px;
+    }
+
+    .staff-forms-row {
+        flex-direction: column; 
+    }
+}
+
+/* BIG SCREENS (e.g. 24" monitor and up) ----------------------- */
+@media (min-width: 1600px) {
+
+  .staff-page {
+    max-width: 90vw;         
+    padding: 0 5vw;
+    margin-top: 100px;        
+  }
+
+  .staff-form-col {
+    flex: 1.2;               
+  }
+
+  .staff-card.card {
+    min-height: 480px;      
+  }
+
+  .staff-card .card-content {
+    padding: 28px 36px;      
+  }
+}
+
+/* FOR THE HINTS ON THE LOG HOURS CARD ---------- */
+.field-hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.80rem;       
+    line-height: 1.2;        
+    color: #9aa4a4;          
+    margin-bottom: 12px;      
+    padding-left: 2px;        
+} 
+
+/* REMOVE NUMBER INPUT ARROWS --------------- */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

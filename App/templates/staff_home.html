@@ -1,99 +1,135 @@
 {% extends "staff_layout.html" %}
 
 {% block content %}
-<div class="container" style="margin-top: 20px;">
+<div class="container staff-page">
 
   {# flash messages #}
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, msg in messages %}
-        <div class="card-panel {{ 'red lighten-4' if category == 'error' else 'green lighten-4' }}">
+        <div class="card-panel
+                    {% if category == 'error' %}
+                      staff-flash-error
+                    {% else %}
+                      staff-flash-success
+                    {% endif %}">
           {{ msg }}
         </div>
       {% endfor %}
     {% endif %}
   {% endwith %}
 
-  <div class="row">
+  <div class="staff-main">
 
-    {# LEFT: select student #}
-    <div class="col s12 m5">
-      <div class="card blue lighten-4">
-        <div class="card-content">
-          <span class="card-title">Select Student to Log Hours For:</span>
 
-          <form method="get" action="{{ url_for('index_views.staff_home_page') }}">
-            <div class="input-field">
-              <input id="student_id" name="student_id" type="number" min="1"
-                     value="{{ selected_student.id if selected_student else '' }}">
-              <label for="student_id" class="active">Student ID</label>
+    <div class="staff-header">
+      <h3>Log Student Activity Hours</h3>
+      <p>
+        Search for a student on the left, review their details,
+        then record the hours completed in the form on the right.
+      </p>
+    </div>
+
+    <div class="staff-forms-row">
+
+      <div class="staff-form-col">
+        <div class="card staff-card">
+          <div class="card-content">
+            <span class="card-title"><b>Select student</b></span>
+
+            <form method="get" action="{{ url_for('index_views.staff_home_page') }}">
+              <div class="input-field">
+                <input id="student_id" name="student_id" type="number" min="1"
+                       value="{{ selected_student.id if selected_student else '' }}">
+                <label for="student_id" class="active">Student ID</label>
+              </div>
+
+              <button type="submit"
+                      class="btn staff-btn-primary waves-effect">
+                Find
+              </button>
+            </form>
+
+            <div class="staff-summary">
+              {% if selected_student %}
+                <p class="staff-summary-title">Selected student</p>
+                <p><strong>ID:</strong> {{ selected_student.id }}</p>
+                <p><strong>Name:</strong> {{ selected_student.name }}</p>
+                <p><strong>Total logged hours:</strong> {{ selected_student.hoursAccumulated }}</p>
+              {% else %}
+                <p class="staff-empty-state">
+                  No student selected yet. Enter a student ID and click <strong>Find</strong>
+                  to view their details.
+                </p>
+              {% endif %}
             </div>
 
-            <button type="submit" class="btn waves-effect waves-light">
-              Find
-            </button>
-          </form>
-
-          <div style="margin-top: 20px;">
-            {% if selected_student %}
-              <p><strong>Student ID:</strong> {{ selected_student.id }}</p>
-              <p><strong>Name:</strong> {{ selected_student.name }}</p>
-              <p><strong>Total Hours:</strong> {{ selected_student.hoursAccumulated }}</p>
-            {% else %}
-              <p>No student selected.</p>
-            {% endif %}
           </div>
         </div>
       </div>
-    </div>
 
-    {# RIGHT: log hours form #}
-    <div class="col s12 m7">
-      <div class="card blue lighten-4">
-        <div class="card-content">
-          <span class="card-title">Log Hours</span>
+      <div class="staff-form-col">
+        <div class="card staff-card">
+          <div class="card-content">
+            <span class="card-title"><b>Log hours</b></span>
 
-          <form method="post"
-                action="{{ url_for('index_views.staff_home_page') }}"
-                onsubmit="return confirm('Are you sure you want to complete this log?');">
+            <form method="post"
+                  action="{{ url_for('index_views.staff_home_page') }}"
+                  onsubmit="return confirm('Are you sure you want to complete this log?');">
 
-            <input type="hidden" name="student_id"
-                   value="{{ selected_student.id if selected_student else '' }}">
+              <input type="hidden" name="student_id"
+                     value="{{ selected_student.id if selected_student else '' }}">
 
-            <div class="input-field">
-              <input id="title" name="title" type="text" required>
-              <label for="title">Title</label>
-            </div>
-
-            <div class="input-field">
-              <input id="hours" name="hours" type="number" step="0.5" min="0" required>
-              <label for="hours">Hours</label>
-            </div>
-
-            <div class="input-field">
-              <textarea id="description" name="description"
-                        class="materialize-textarea"></textarea>
-              <label for="description">Description</label>
-            </div>
-
-            <div class="row" style="margin-top: 10px;">
-              <div class="col s6">
-                <button type="reset" class="btn grey lighten-1 waves-effect">
-                  Clear
-                </button>
+              <!-- Title -->
+              <div class="input-field">
+                <input id="title" name="title" type="text" required>
+                <label for="title" class="active">Title</label>
+                <span class="field-hint">e.g. Community service project</span>
               </div>
-              <div class="col s6 right-align">
-                <button type="submit" class="btn green lighten-2 waves-effect">
-                  Log
-                </button>
-              </div>
-            </div>
-          </form>
 
+              <!-- Hours -->
+              <div class="input-field">
+                <input id="hours" name="hours" type="number"
+                       step="0.5" min="0" required>
+                <label for="hours" class="active">Hours</label>
+                <span class="field-hint">e.g. 2.5</span>
+              </div>
+
+              <!-- Description -->
+              <div class="input-field">
+                <textarea id="description" name="description"
+                          class="materialize-textarea"></textarea>
+                <label for="description" class="active">Description</label>
+                <span class="field-hint">
+                  Brief description of the activity (optional)
+                </span>
+              </div>
+
+              <div class="row staff-form-actions">
+                <div class="col s6">
+                  <button type="reset"
+                          class="btn staff-btn-secondary waves-effect">
+                    Clear
+                  </button>
+                </div>
+                <div class="col s6 right-align">
+                  <button type="submit"
+                          class="btn staff-btn-primary waves-effect"
+                          {% if not selected_student %}disabled{% endif %}>
+                    Log
+                  </button>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
         </div>
       </div>
+
     </div>
 
   </div>
+
 </div>
 {% endblock %}
