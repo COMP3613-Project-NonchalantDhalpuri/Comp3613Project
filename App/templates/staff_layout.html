@@ -2,11 +2,16 @@
 
 {% block title %}Staff {% endblock %}
 
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='staff_home_page_style.css') }}">
+{% endblock %}
+
 {% block navbar %}
-<nav class="blue darken-2">
+<nav class="staff-nav">
   <div class="nav-wrapper">
   
-    <a href="#!" class="brand-logo left" style="margin-left: 15px;">
+    <a href="#!" class="brand-logo left staff-brand">
       Welcome {{ current_user.staff_id if current_user else "StaffID" }}!
     </a>
 
@@ -15,32 +20,31 @@
       <!-- HOME -->
       <li>
         <a href="{{ url_for('index_views.staff_home_page') }}"
-           {% if active_tab == 'home' %}class="white-text text-darken-4"{% endif %}>
+           {% if active_tab == 'home' %}class="active-tab"{% endif %}>
           Home
         </a>
       </li>
 
       <!-- REQUESTS -->
       <li>
-        <a href="{{ url_for('staff_views.staff_pending_requests_page')}}"
-           {% if active_tab == 'requests' %}class="white-text text-darken-4"{% endif %}>
+        <a href="{{ url_for('staff_views.staff_pending_requests_page') }}"
+           {% if active_tab == 'requests' %}class="active-tab"{% endif %}>
           Requests
         </a>
       </li>
 
-      <!-- LEADERBOARDS (placeholder for now) -->
+      <!-- LEADERBOARDS -->
       <li>
         <a href="#"
-           {% if active_tab == 'leaderboards' %}class="white-text text-darken-4"{% endif %}>
+           {% if active_tab == 'leaderboards' %}class="active-tab"{% endif %}>
           Leaderboards
         </a>
       </li>
 
-
       <!-- STUDENT HOURS -->
       <li>
         <a href="{{ url_for('index_views.staff_student_hours_page') }}"
-           {% if active_tab == 'student_hours' %}class="white-text text-darken-4"{% endif %}>
+           {% if active_tab == 'student_hours' %}class="active-tab"{% endif %}>
           Student Hours
         </a>
       </li>
