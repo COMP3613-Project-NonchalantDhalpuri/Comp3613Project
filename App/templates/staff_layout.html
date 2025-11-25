@@ -36,9 +36,10 @@
         </a>
       </li>
 
-      <!-- STUDENT HOURS (placeholder for now) -->
+
+      <!-- STUDENT HOURS -->
       <li>
-        <a href="#"
+        <a href="{{ url_for('index_views.staff_student_hours_page') }}"
            {% if active_tab == 'student_hours' %}class="white-text text-darken-4"{% endif %}>
           Student Hours
         </a>
