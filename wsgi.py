@@ -330,22 +330,23 @@ def init():
 
 
 
-# # '''
-# # Test Commands
-# # '''
-
-# # test = AppGroup('test', help='Testing commands') 
-
-# # @test.command("unit", help="Run User tests")
-# # def unit_tests_command():
-    
-# #     sys.exit(pytest.main(["-k", "UserUnitTests or StudentUnitTests or StaffUnitTests or RequestUnitTests or LoggedHoursUnitTests"]))
-    
-# # app.cli.add_command(test)
-
 # '''
 # Test Commands
 # '''
+
+test = AppGroup('test', help='Testing commands') 
+
+@test.command("user", help="Run User tests")
+@click.argument("type", default="unit")
+def user_tests_command(type):
+    if type == "unit":
+        sys.exit(pytest.main(["-k", "UserUnitTests or StudentUnitTests or StaffUnitTests"]))
+    else:
+        sys.exit(pytest.main(["-k", "UserIntegrationTests or StudentIntegrationTests or StaffIntegrationTests"]))
+    
+app.cli.add_command(test)
+
+
 
 # test = AppGroup('test', help='Testing commands') 
 
