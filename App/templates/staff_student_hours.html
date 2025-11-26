@@ -1,25 +1,32 @@
-{% extends "staff_layout.html" %} {% block content %}
-<div class="container" style="margin-top: 30px; max-width: 1400px; width: 95%">
-  {% with messages = get_flashed_messages(with_categories=true) %} {% if
-  messages %} {% for category, msg in messages %}
-  <div
-    class="card-panel {{ 'red lighten-4 red-text text-darken-4' if category == 'error' else 'green lighten-4 green-text text-darken-4' }}"
-  >
-    {{ msg }}
-  </div>
-  {% endfor %} {% endif %} {% endwith %}
+{% extends "staff_layout.html" %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='staff_student_hours.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="hours-container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <div
+          class="card-panel {{ 'red lighten-4 red-text text-darken-4' if category == 'error' else 'green lighten-4 green-text text-darken-4' }}"
+        >
+          {{ msg }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 
   <!-- FILTER BAR -->
-  <div class="card blue lighten-4 z-depth-1" style="border-radius: 10px">
-    <div class="card-content" style="padding: 30px">
-      <span class="card-title" style="font-size: 1.7rem; font-weight: 600">
+  <div class="card z-depth-1 hours-filter-card">
+    <div class="card-content hours-filter-card-content">
+      <span class="card-title hours-filter-title">
         View Student Hours
       </span>
 
-      <p
-        class="grey-text text-darken-2"
-        style="margin-bottom: 25px; font-size: 1.1rem"
-      >
+      <p class="grey-text text-darken-2 hours-filter-description">
         Search or filter students by ID, name, or minimum hours accumulated.
       </p>
 
@@ -27,7 +34,7 @@
         method="get"
         action="{{ url_for('staff_views.staff_student_hours_page') }}"
       >
-        <div class="row" style="margin-bottom: 0">
+        <div class="row hours-row-tight">
           <div class="col s12 m4">
             <div class="input-field">
               <input
@@ -67,20 +74,19 @@
           </div>
         </div>
 
-        <div class="row" style="margin-top: 15px">
-          <div class="col s6">
+        <div class="row hours-filter-actions-row">
+          <div class="col s12 m6">
             <button
               type="submit"
-              class="btn blue darken-2 waves-effect waves-light"
-              style="padding: 0 25px"
+               class="btn apply-filters-btn waves-effect waves-light"
             >
               Apply Filters
             </button>
           </div>
-          <div class="col s6 right-align">
+          <div class="col s12 m6 hours-clear-filters-col">
             <a
               href="{{ url_for('staff_views.staff_student_hours_page') }}"
-              class="btn-flat waves-effect grey-text text-darken-2"
+              class="btn clear-filters-btn waves-effect"
             >
               Clear Filters
             </a>
@@ -91,50 +97,47 @@
   </div>
 
   <!-- STUDENT CARDS -->
-  {% if students %} {% for student in students %}
-  <div
-    class="card blue lighten-4 hoverable z-depth-1"
-    style="margin-top: 20px; border-radius: 10px; width: 100%"
-  >
-    <div class="card-content" style="padding: 25px 32px; font-size: 1.05rem">
-      <div
-        class="row"
-        style="margin-bottom: 0; display: flex; align-items: center"
-      >
-        <div class="col s12 m9">
-          <p>
-            <span class="grey-text text-darken-2">ID:</span>
-            <strong>{{ student.id }}</strong>
-          </p>
-          <p>
-            <span class="grey-text text-darken-2">Name:</span>
-            <strong>{{ student.name }}</strong>
-          </p>
-          <p>
-            <span class="grey-text text-darken-2">Total Hours:</span>
-            <strong>{{ student.hoursAccumulated }} Hours</strong>
-          </p>
-        </div>
+  {% if students %}
+    {% for student in students %}
+      <div class="card hoverable z-depth-1 hours-student-card">
+        <div class="card-content hours-student-card-content">
+          <div class="row hours-row-tight hours-student-row">
+            <div class="col s12 m9">
+              <p>
+                <span class="grey-text text-darken-2">ID:</span>
+                <strong>{{ student.id }}</strong>
+              </p>
+              <p>
+                <span class="grey-text text-darken-2">Name:</span>
+                <strong>{{ student.name }}</strong>
+              </p>
+              <p>
+                <span class="grey-text text-darken-2">Total Hours:</span>
+                <strong>{{ student.hoursAccumulated }} Hours</strong>
+              </p>
+            </div>
 
-        <div class="col s12 m3 right-align" style="margin-top: 10px">
-          <span class="grey-text text-darken-2">Pending Requests</span>
-          <span
-            class="new badge green"
-            data-badge-caption=""
-            style="font-size: 0.9rem; margin-left: 5px"
-          >
-            {{ pending_counts.get(student.id, 0) }}
-          </span>
+            <div class="col s12 m3 hours-pending-col">
+              <span class="grey-text text-darken-2 hours-pending-label">
+                Pending Requests
+              </span>
+              <span
+                class="new badge green hours-pending-badge"
+                data-badge-caption=""
+              >
+                {{ pending_counts.get(student.id, 0) }}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
+    {% endfor %}
+  {% else %}
+    <div class="card-panel blue lighten-5 hours-empty-state">
+      <span class="grey-text text-darken-2">
+        No students found for the selected filters.
+      </span>
     </div>
-  </div>
-  {% endfor %} {% else %}
-  <div class="card-panel blue lighten-5">
-    <span class="grey-text text-darken-2">
-      No students found for the selected filters.
-    </span>
-  </div>
   {% endif %}
 </div>
 {% endblock %}
