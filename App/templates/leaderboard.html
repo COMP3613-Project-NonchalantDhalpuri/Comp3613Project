@@ -8,55 +8,99 @@
    <link rel="stylesheet" href="{{ url_for('static', filename='student_leaderboard.css') }}">
 {% endblock %}
 
+
 {% block navbar %}
-<nav class="student-nav">
-  <div class="nav-wrapper">
-    <a class="brand-logo left">
-      {% if viewer_is_student and current_user %}
-        Welcome {{ current_user.student_id }}!
-      {% else %}
-        Leaderboards
-      {% endif %}
-    </a>
+  {% if viewer_is_student %}
+  <nav class="student-nav">
+    <div class="nav-wrapper">
+      <a class="brand-logo left">
+        {% if current_user %}
+          Welcome {{ current_user.name }}!
+        {% else %}
+          Welcome !
+        {% endif %}
+      </a>
 
-    <ul id="nav-mobile" class="right">
-      
+      <ul id="nav-mobile" class="right">
+        <li>
+          <a href="{{ url_for('index_views.student_home_page') }}"
+             class="{% if active_tab == 'home' %}active-tab{% endif %}">
+            Home
+          </a>
+        </li>
 
-      <li>
-        <a href="{{ url_for('index_views.student_home_page') }}"
-           class="{% if active_tab == 'home' %}active-tab{% endif %}">
-          Home
-        </a>
-      </li>
+        <li>
+          <a href="{{ url_for('index_views.leaderboard_page') }}"
+             class="{% if active_tab == 'leaderboards' %}active-tab{% endif %}">
+            Leaderboards
+          </a>
+        </li>
 
-      <li>
-        <a href="{{ url_for('index_views.leaderboard_page') }}"
-           class="{% if active_tab == 'leaderboards' %}active-tab{% endif %}">
-          Leaderboards
-        </a>
-      </li>
+        <li>
+          <a href="{{ url_for('index_views.student_accolades_page') }}"
+             class="{% if active_tab == 'accolades' %}active-tab{% endif %}">
+            Accolades
+          </a>
+        </li>
 
-      <li>
-        <a href="{{ url_for('index_views.student_accolades_page') }}"
-           class="{% if active_tab == 'accolades' %}active-tab{% endif %}">
-          Accolades
-        </a>
-      </li>
+        <li>
+          <a href="#"
+             class="{% if active_tab == 'history' %}active-tab{% endif %}">
+            History
+          </a>
+        </li>
 
-      {# temporary History placeholder, but with correct HTML #}
-      <li>
-        <a href="#"
-           class="{% if active_tab == 'history' %}active-tab{% endif %}">
-          History
-        </a>
-      </li>
+        <li>
+          <a href="{{ url_for('auth_views.logout_action') }}">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-      <li>
-        <a href="{{ url_for('auth_views.logout_action') }}">Log Out</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  {% else %}
+  <nav class="staff-nav">
+    <div class="nav-wrapper">
+      <a class="brand-logo left">
+        Welcome !
+      </a>
+
+      <ul id="nav-mobile" class="right">
+        <li>
+          <a href="{{ url_for('index_views.staff_home_page') }}"
+             class="{% if active_tab == 'home' %}active-tab{% endif %}">
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a href="#"
+             class="{% if active_tab == 'requests' %}active-tab{% endif %}">
+            Requests
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('index_views.leaderboard_page') }}"
+             class="{% if active_tab == 'leaderboards' %}active-tab{% endif %}">
+            Leaderboards
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('index_views.staff_student_hours_page') }}"
+             class="{% if active_tab == 'student_hours' %}active-tab{% endif %}">
+            Student Hours
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('auth_views.logout_action') }}">Log Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  {% endif %}
+
 {% endblock %}
 
 {% block content %}

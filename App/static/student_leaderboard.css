@@ -23,6 +23,22 @@ html, body {
     background-color: rgba(255,255,255,0.35);
 }
 
+
+.staff-nav {
+    background-color: #a8e6cf;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.staff-nav a {
+    color: #1b4332;
+    font-weight: 500;
+}
+
+.staff-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+
 .active-tab {
     background-color: rgba(255,255,255,0.55);
     border-radius: 999px;
