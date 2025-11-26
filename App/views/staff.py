@@ -138,7 +138,8 @@ def staff_pending_requests_page():
     return render_template(
         'staff_pending_requests.html',
         pending_requests=pending_requests,
-        num_pending=len(pending_requests)
+        num_pending=len(pending_requests),
+        active_tab='requests'
     )
 
 @staff_views.route('/staff/student-hours', methods=['GET'])

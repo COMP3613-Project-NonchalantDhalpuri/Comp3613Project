@@ -128,5 +128,6 @@ def student_history_page():
 
     return render_template(
         'student_history.html',
-        activity_history = activity_history
+        activity_history = activity_history,
+        active_tab='history'
     )
