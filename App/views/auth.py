@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, jsonify, request, flash, send_from_directory, flash, redirect, url_for
-from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, set_access_cookies
+from flask import Blueprint, request, flash, flash, redirect, url_for
+from flask_jwt_extended import unset_jwt_cookies, set_access_cookies
 
 from.index import index_views
 
@@ -26,7 +26,7 @@ def login_staff():
         response = redirect(url_for('index_views.login_page'))
     else:
         flash('Login Successful')
-        response = redirect(url_for('index_views.staff_home_page'))
+        response = redirect(url_for('staff_views.staff_home_page'))
         set_access_cookies(response, token) 
     return response
 
@@ -46,7 +46,7 @@ def login_student():
         response = redirect(url_for('index_views.login_page'))
     else:
         flash('Login Successful')
-        response = redirect(url_for('index_views.student_home_page'))
+        response = redirect(url_for('student_views.student_home_page'))
         set_access_cookies(response, token) 
     return response
 
