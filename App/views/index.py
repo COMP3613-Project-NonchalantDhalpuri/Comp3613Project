@@ -229,19 +229,28 @@ def staff_student_hours_page():
 @index_views.route('/leaderboard', methods=['GET'])
 def leaderboard_page():
     viewer_student = None
-
+    viewer_type = None
+    
     try:
         verify_jwt_in_request(optional=True)
         identity = get_jwt_identity()
 
         if identity is not None:
-            viewer_student = get_student_by_id(identity)
+            try:
+                viewer_student = get_student_by_id(identity)
+                viewer_type = "student"     
+            except Exception:
+                viewer_student = None
+                viewer_type = "staff"      
+        else:
+            viewer_type = "staff"           
 
     except ExpiredSignatureError:
         flash("Session has expired. Please log in again.", "error")
         return redirect(url_for('index_views.login_page'))
     except Exception:
         viewer_student = None
+        viewer_type = "staff"                
 
     students = get_all_students() or []
 
@@ -275,6 +284,7 @@ def leaderboard_page():
         'leaderboard.html',
         leaders=students,
         viewer_is_student=viewer_student is not None,
+        viewer_type=viewer_type,
         user_rank=user_rank,
         user_hours=user_hours,
         active_tab='leaderboards'
