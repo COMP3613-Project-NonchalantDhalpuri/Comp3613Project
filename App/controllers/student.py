@@ -1,5 +1,5 @@
 from App.database import db
-from App.models import User,Staff,Student,Request
+from App.models import Student,ActivityHistory
 
 def create_student(name,email,password):
     new_student=Student(name = name, email = email, password = password)
@@ -13,7 +13,7 @@ def get_student_by_id(student_id):
 def get_all_students():
     return db.session.scalars(db.select(Student)).all()
 
-def calculate_accolades(student_id):
+def calculate_accolades(student_id,staff_id=None):
     student = get_student_by_id(student_id)
 
     milestones = [10, 25, 50]
@@ -21,7 +21,10 @@ def calculate_accolades(student_id):
 
     for milestone in milestones:
         if student.hoursAccumulated >= milestone and milestone not in student.accolades:
-            new_accolades.append(f'{milestone} Hours Milestone')
+            title = f'{milestone} Hours Milestone'
+            new_accolades.append(title)
+            new_activity_log = ActivityHistory(student_id=student_id,staff_id=staff_id,hours=milestone,action="accolade",title=title)
+            db.session.add(new_activity_log)
 
     student.accolades = new_accolades
 

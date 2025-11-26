@@ -1,7 +1,7 @@
 from App.database import db
 from App.models import Staff,Student,Request
 from App.models.commands import ApproveRequestCommand, DenyRequestCommand
-from .student import get_student_by_id
+from .student import get_student_by_id, calculate_accolades
 from .staff import get_staff_by_id
 
 def create_request(student_id,hours,title,description=None): 
@@ -70,6 +70,8 @@ def approve_request(staff_id, request_id): #staff approves a student's hours req
 
     approval = ApproveRequestCommand(request, student)
     approval.execute()
+    calculate_accolades(student_id=request.student_id, staff_id=staff_id)
+    
 
 def process_request_denial(staff_id, request_id): 
     staff = get_staff_by_id(staff_id)
@@ -84,3 +86,4 @@ def process_request_denial(staff_id, request_id):
 
     denial = DenyRequestCommand(request, student)
     denial.execute()
+    calculate_accolades(student_id=request.student_id, staff_id=staff_id)

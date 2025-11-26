@@ -1,6 +1,6 @@
 from App.database import db
 from App.models.commands import LogHoursCommand
-from .student import get_student_by_id
+from .student import get_student_by_id, calculate_accolades
 from .staff import get_staff_by_id
 
 def get_activity_history_by_student(student_id):
@@ -35,5 +35,6 @@ def log_hours(staff_id, student_id, hours, title, activity_description=None):
         description=activity_description
     )
     log_entry = log_command.execute()
+    calculate_accolades(student_id=student_id, staff_id=staff_id)
     return log_entry
 

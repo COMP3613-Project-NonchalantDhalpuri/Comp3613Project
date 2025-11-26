@@ -25,7 +25,7 @@ class ApproveRequestCommand(Command):
             request_id = self.request_id,
             title=self.request.title,
             hours=self.request.hours,
-            action='approved request',
+            action='approved',
             description=self.request.description
         )
 
@@ -45,7 +45,7 @@ class DenyRequestCommand(Command):
             request_id = self.request_id,
             title=self.request.title,
             hours=self.request.hours,
-            action='denied request',
+            action='denied',
             description=self.request.description
         )
         
@@ -67,7 +67,7 @@ class LogHoursCommand(Command):
             staff_id=self.staff_id,
             title=self.title,
             hours=self.hours,
-            action='logged by staff',
+            action='logged',
             description=self.description
         )
         db.session.add(activity)

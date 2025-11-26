@@ -25,7 +25,7 @@
       </li>
 
       <li>
-        <a href="#"
+        <a href="{{url_for('index_views.leaderboard_page')}}"
            {% if active_tab == 'leaderboards' %}class="active-tab"{% endif %}>
           Leaderboards
         </a>
@@ -39,7 +39,7 @@
       </li>
 
       <li>
-        <a href="#"
+        <a href="{{ url_for('student_views.student_history_page')}}"
            {% if active_tab == 'history' %}class="active-tab"{% endif %}>
           History
         </a>
