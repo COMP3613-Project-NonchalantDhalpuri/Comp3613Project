@@ -1,572 +1,657 @@
 /* Student Accolades Page - Consistent with student_home_page_style.css */
 
 .student-page {
-    max-width: 1400px;
-    margin: 70px auto 40px auto;
-    padding: 0 60px;
+  max-width: 1400px;
+  margin: 70px auto 40px auto;
+  padding: 0 60px;
 }
 
 .student-main {
-    min-height: calc(100vh - 160px);
-    display: flex;
-    flex-direction: column;
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
 }
 
 /* MAIN WRAPPER */
 
 .accolades-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .accolades-header h3 {
-    margin: 0 0 10px 0;
-    font-weight: 700;
-    color: #1b4332;
-    font-size: 1.8rem;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  color: #1b4332;
+  font-size: 1.8rem;
 }
 
 .accolades-header p {
-    margin: 0;
-    color: #4f6f52;
-    font-size: 0.95rem;
+  margin: 0;
+  color: #4f6f52;
+  font-size: 0.95rem;
 }
 
 /* LAYOUT: TWO COLUMNS */
 
 .accolades-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
 }
 
 /* LEFT COLUMN */
 
 .accolades-left {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 /* PROGRESS CARD */
 
 .progress-card {
-    background-color: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
 }
 
 .progress-header {
-    background: linear-gradient(135deg, #95d5b2 0%, #74c69d 100%);
-    padding: 20px 24px;
-    color: #ffffff;
+  background: linear-gradient(135deg, #95d5b2 0%, #74c69d 100%);
+  padding: 20px 24px;
+  color: #ffffff;
 }
 
 .progress-header h5 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 700;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .progress-content {
-    padding: 28px 24px;
+  padding: 28px 24px;
 }
 
 .progress-percentage {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .percentage-number {
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #0da1db;
-    line-height: 1;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #0da1db;
+  line-height: 1;
 }
 
 .percentage-label {
-    font-size: 0.95rem;
-    color: #6c757d;
-    font-weight: 600;
+  font-size: 0.95rem;
+  color: #6c757d;
+  font-weight: 600;
 }
 
 .progress-bar {
-    background-color: #e9ecef;
-    border-radius: 12px;
-    height: 16px;
-    overflow: hidden;
-    margin-bottom: 24px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  background-color: #e9ecef;
+  border-radius: 12px;
+  height: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 .progress-fill {
-    background: linear-gradient(90deg, #95d5b2 0%, #74c69d 100%);
-    height: 100%;
-    border-radius: 12px;
-    transition: width 0.3s ease;
-    box-shadow: 0 2px 6px rgba(116, 198, 157, 0.4);
+  background: linear-gradient(90deg, #95d5b2 0%, #74c69d 100%);
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.3s ease;
+  box-shadow: 0 2px 6px rgba(116, 198, 157, 0.4);
 }
 
 .next-milestone-info {
-    background-color: #f0faf3;
-    border-left: 4px solid #95d5b2;
-    border-radius: 8px;
-    padding: 16px;
+  background-color: #f0faf3;
+  border-left: 4px solid #95d5b2;
+  border-radius: 8px;
+  padding: 16px;
 }
 
 .next-label {
-    margin: 0 0 4px 0;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #6c757d;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  margin: 0 0 4px 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .next-name {
-    margin: 0 0 6px 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1b4332;
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1b4332;
 }
 
 .next-requirement {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #4f6f52;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4f6f52;
+}
+
+/* YOUR HOURS CARD */
+
+.your-hours-card {
+  background: linear-gradient(135deg, #6b9080 0%, #52796f 100%);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(82, 121, 111, 0.25);
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.your-hours-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.your-hours-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.your-hours-title::after {
+  content: "Your Total Hours";
+}
+
+.your-hours-hours {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.your-hours-hours::after {
+  content: "hrs";
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-left: 8px;
+  opacity: 0.85;
 }
 
 /* MILESTONES CARD */
 
 .milestones-card {
-    background-color: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .milestones-header {
-    background: linear-gradient(135deg, #a8e6cf 0%, #95d5b2 100%);
-    padding: 20px 24px;
-    color: #1b4332;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: linear-gradient(135deg, #a8e6cf 0%, #95d5b2 100%);
+  padding: 20px 24px;
+  color: #1b4332;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .milestones-header h5 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 700;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .milestone-count {
-    background-color: rgba(255, 255, 255, 0.4);
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #1b4332;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1b4332;
 }
 
 .milestones-list {
-    padding: 16px;
-    max-height: 400px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  padding: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .empty-state {
-    padding: 32px 16px;
-    text-align: center;
-    color: #6c757d;
-    font-size: 0.95rem;
-    margin: 0;
+  padding: 32px 16px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin: 0;
 }
 
 .milestone-item {
-    background-color: #f8fafb;
-    border: 1px solid #e9ecef;
-    border-radius: 12px;
-    padding: 14px 16px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    transition: all 0.2s ease;
+  background-color: #f8fafb;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: all 0.2s ease;
 }
 
 .milestone-item:hover {
-    background-color: #f0faf3;
-    border-color: #95d5b2;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  background-color: #f0faf3;
+  border-color: #95d5b2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .milestone-icon {
-    font-size: 1.4rem;
-    flex-shrink: 0;
-    line-height: 1;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
 }
 
 .milestone-info {
-    flex: 1;
-    min-width: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .milestone-name {
-    margin: 0 0 4px 0;
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #1b4332;
-    word-break: break-word;
+  margin: 0 0 4px 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1b4332;
+  word-break: break-word;
 }
 
 .milestone-requirement {
-    margin: 0 0 2px 0;
-    font-size: 0.85rem;
-    color: #6c757d;
+  margin: 0 0 2px 0;
+  font-size: 0.85rem;
+  color: #6c757d;
 }
 
 .milestone-date {
-    margin: 0;
-    font-size: 0.8rem;
-    color: #a0a8a8;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #a0a8a8;
 }
 
 .milestone-link {
-    font-size: 0.85rem;
-    color: #0da1db;
-    text-decoration: none;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: color 0.2s ease;
+  font-size: 0.85rem;
+  color: #0da1db;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
 .milestone-link:hover {
-    color: #0985b9;
-    text-decoration: underline;
+  color: #0985b9;
+  text-decoration: underline;
 }
 
 /* RIGHT COLUMN */
 
 .accolades-right {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 /* ACCOLADE DETAILS CARD */
 
 .accolade-details-card {
-    background-color: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .details-header {
-    background: linear-gradient(135deg, #a8cfba 0%, #95d5b2 100%);
-    padding: 20px 24px;
-    color: #1b4332;
+  background: linear-gradient(135deg, #a8cfba 0%, #95d5b2 100%);
+  padding: 20px 24px;
+  color: #1b4332;
 }
 
 .details-header h5 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 700;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .details-content {
-    padding: 28px 24px;
-    min-height: 240px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  padding: 28px 24px;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .selected-milestone {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .milestone-badge {
-    font-size: 3rem;
-    line-height: 1;
-    margin-bottom: 16px;
-    display: block;
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 16px;
+  display: block;
 }
 
 .milestone-title {
-    margin: 0 0 12px 0;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #1b4332;
+  margin: 0 0 12px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1b4332;
 }
 
 .milestone-requirement-detail {
-    margin: 0 0 12px 0;
-    font-size: 0.95rem;
-    color: #4f6f52;
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+  color: #4f6f52;
 }
 
 .milestone-description {
-    margin: 0;
-    font-size: 0.95rem;
-    color: #6c757d;
-    line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #6c757d;
+  line-height: 1.6;
 }
 
 .empty-selection {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .selection-prompt {
-    margin: 0;
-    font-size: 1rem;
-    color: #6c757d;
+  margin: 0;
+  font-size: 1rem;
+  color: #6c757d;
 }
 
 /* AWARDED ACCOLADES CARD */
 
 .awarded-accolades-card {
-    background-color: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .awarded-header {
-    background: linear-gradient(135deg, #cfe8ff 0%, #b3dffe 100%);
-    padding: 20px 24px;
-    color: #1b4332;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: linear-gradient(135deg, #cfe8ff 0%, #b3dffe 100%);
+  padding: 20px 24px;
+  color: #1b4332;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .awarded-header h5 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 700;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .badge-count {
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #1b4332;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1b4332;
 }
 
 .badges-grid {
-    padding: 24px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    min-height: 160px;
-    align-content: center;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  min-height: 160px;
+  align-content: center;
 }
 
 .empty-badges {
-    grid-column: 1 / -1;
-    margin: 0;
-    text-align: center;
-    color: #6c757d;
-    font-size: 0.95rem;
+  grid-column: 1 / -1;
+  margin: 0;
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.95rem;
 }
 
 .badge-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .badge-link {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease;
 }
 
 .badge-link:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .badge-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ffe082 0%, #ffd54f 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    box-shadow: 0 4px 12px rgba(255, 224, 130, 0.4);
-    transition: box-shadow 0.2s ease;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffe082 0%, #ffd54f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 12px rgba(255, 224, 130, 0.4);
+  transition: box-shadow 0.2s ease;
 }
 
 .badge-link:hover .badge-circle {
-    box-shadow: 0 6px 16px rgba(255, 224, 130, 0.6);
+  box-shadow: 0 6px 16px rgba(255, 224, 130, 0.6);
 }
 
 .badge-name {
-    margin: 0;
-    font-size: 0.8rem;
-    color: #1b4332;
-    font-weight: 600;
-    text-align: center;
-    word-break: break-word;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #1b4332;
+  font-weight: 600;
+  text-align: center;
+  word-break: break-word;
 }
 
 /* RESPONSIVE DESIGN */
 
 @media (max-width: 1200px) {
-    .accolades-layout {
-        grid-template-columns: 1fr;
-    }
+  .accolades-layout {
+    grid-template-columns: 1fr;
+  }
 
-    .milestones-list {
-        max-height: 300px;
-    }
+  .milestones-list {
+    max-height: 300px;
+  }
 }
 
 @media (max-width: 768px) {
-    .student-page {
-        padding: 0 20px;
-    }
+  .student-page {
+    padding: 0 20px;
+  }
 
-    .accolades-layout {
-        gap: 20px;
-    }
+  .accolades-layout {
+    gap: 20px;
+  }
 
-    .progress-percentage {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .progress-percentage {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .progress-header,
-    .details-header,
-    .milestones-header,
-    .awarded-header {
-        padding: 16px 18px;
-    }
+  .progress-header,
+  .details-header,
+  .milestones-header,
+  .awarded-header {
+    padding: 16px 18px;
+  }
 
-    .progress-content,
-    .details-content,
-    .badges-grid {
-        padding: 20px 18px;
-    }
+  .progress-content,
+  .details-content,
+  .badges-grid {
+    padding: 20px 18px;
+  }
 
-    .milestones-list {
-        padding: 12px;
-    }
+  .milestones-list {
+    padding: 12px;
+  }
 
-    .badges-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .your-hours-card {
+    padding: 28px 20px;
+  }
+
+  .your-hours-title {
+    font-size: 0.85rem;
+  }
+
+  .your-hours-hours {
+    font-size: 3.2rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .student-page {
-        margin: 60px auto 30px auto;
-        padding: 0 16px;
-    }
+  .student-page {
+    margin: 60px auto 30px auto;
+    padding: 0 16px;
+  }
 
-    .accolades-header h3 {
-        font-size: 1.4rem;
-    }
+  .accolades-header h3 {
+    font-size: 1.4rem;
+  }
 
-    .accolades-header p {
-        font-size: 0.85rem;
-    }
+  .accolades-header p {
+    font-size: 0.85rem;
+  }
 
-    .percentage-number {
-        font-size: 2rem;
-    }
+  .percentage-number {
+    font-size: 2rem;
+  }
 
-    .percentage-label {
-        font-size: 0.85rem;
-    }
+  .percentage-label {
+    font-size: 0.85rem;
+  }
 
-    .milestones-header h5,
-    .details-header h5,
-    .awarded-header h5 {
-        font-size: 1rem;
-    }
+  .milestones-header h5,
+  .details-header h5,
+  .awarded-header h5 {
+    font-size: 1rem;
+  }
 
-    .badge-circle {
-        width: 50px;
-        height: 50px;
-        font-size: 1.4rem;
-    }
+  .badge-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
 
-    .badges-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
+  .badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .your-hours-card {
+    padding: 24px 18px;
+  }
+
+  .your-hours-hours {
+    font-size: 2.8rem;
+  }
+
+  .your-hours-hours::after {
+    font-size: 1rem;
+  }
 }
 
 /* BIG SCREENS */
 
 @media (min-width: 1600px) {
-    .student-page {
-        max-width: 90vw;
-        padding: 0 5vw;
-        margin-top: 100px;
-    }
+  .student-page {
+    max-width: 90vw;
+    padding: 0 5vw;
+    margin-top: 100px;
+  }
 
-    .accolades-layout {
-        gap: 40px;
-    }
+  .accolades-layout {
+    gap: 40px;
+  }
 
-    .progress-card,
-    .milestones-card,
-    .accolade-details-card,
-    .awarded-accolades-card {
-        min-height: auto;
-    }
+  .progress-card,
+  .milestones-card,
+  .accolade-details-card,
+  .awarded-accolades-card {
+    min-height: auto;
+  }
 
-    .milestones-list {
-        max-height: 500px;
-    }
+  .milestones-list {
+    max-height: 500px;
+  }
 
-    .badges-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+  .badges-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* SCROLLBAR STYLING */
 
 .milestones-list::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 .milestones-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .milestones-list::-webkit-scrollbar-thumb {
-    background: #95d5b2;
-    border-radius: 10px;
+  background: #95d5b2;
+  border-radius: 10px;
 }
 
 .milestones-list::-webkit-scrollbar-thumb:hover {
-    background: #74c69d;
+  background: #74c69d;
 }

@@ -85,8 +85,9 @@ def student_accolades_page():
     except Exception:
         return redirect(url_for('index_views.login_page'))
 
+    accolade_index = request.args.get("accolade_index", type=int)
     student = get_student_by_id(current_user.id)
-    recent_milestones = get_student_accolades(current_user.id)
+    awarded_accolades = get_student_accolades(current_user.id)
     next_milestone = get_next_milestone(current_user.id)
 
     if next_milestone:
@@ -96,17 +97,17 @@ def student_accolades_page():
     else:
         progress_percent = 100
 
-    selected_milestone = recent_milestones[0] if recent_milestones else None
-    awarded_accolades = recent_milestones
+    selected_milestone = awarded_accolades[accolade_index] if accolade_index is not None else None
+    selected_milestone_hours = int(selected_milestone.split()[0]) if selected_milestone is not None else None
 
     return render_template(
         'student_accolades.html',
         student=student,
-        recent_milestones=recent_milestones,
         next_milestone=next_milestone,
         progress_percent=progress_percent,
         selected_milestone=selected_milestone,
         awarded_accolades=awarded_accolades,
+        selected_milestone_hours = selected_milestone_hours
     )
 
 @student_views.route('/student/history', methods=['GET'])
