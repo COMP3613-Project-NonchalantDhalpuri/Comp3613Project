@@ -75,7 +75,8 @@ def student_home_page():
         'student_home.html',
         approved_requests=approved_requests,
         pending_requests=pending_requests,
-        denied_requests=denied_requests
+        denied_requests=denied_requests, 
+        active_tab='home'
     )
 
 

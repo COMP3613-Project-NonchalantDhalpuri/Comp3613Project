@@ -2,40 +2,45 @@
 
 {% block title %}Student {% endblock %}
 
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='student_home_page_style.css') }}">
+{% endblock %}
+
 {% block navbar %}
-<nav class="blue">
+<nav class="student-nav">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo left" style="margin-left: 15px;">
+
+    <a href="#!" class="brand-logo left student-brand">
       Welcome {{ current_user.student_id if current_user else "StudentID" }}!
     </a>
 
     <ul id="nav-mobile" class="right">
+
       <li>
         <a href="{{ url_for('index_views.student_home_page') }}"
-           {% if active_tab == 'home' %}class="white-text text-darken-4"{% endif %}>
+           {% if active_tab == 'home' %}class="active-tab"{% endif %}>
           Home
         </a>
       </li>
 
-      
       <li>
         <a href="#"
-           {% if active_tab == 'leaderboards' %}class="white-text text-darken-4"{% endif %}>
+           {% if active_tab == 'leaderboards' %}class="active-tab"{% endif %}>
           Leaderboards
         </a>
       </li>
 
       <li>
-        <a href="#"
-           {% if active_tab == 'accolades' %}class="white-text text-darken-4"{% endif %}>
+        <a href="{{ url_for('index_views.student_accolades_page') }}"
+           {% if active_tab == 'accolades' %}class="active-tab"{% endif %}>
           Accolades
         </a>
       </li>
 
-      
       <li>
         <a href="#"
-           {% if active_tab == 'history' %}class="white-text text-darken-4"{% endif %}>
+           {% if active_tab == 'history' %}class="active-tab"{% endif %}>
           History
         </a>
       </li>

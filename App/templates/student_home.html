@@ -1,170 +1,163 @@
-{% extends "student_layout.html" %} {%block styles%}
-<style>
-  .sub-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 40px;
-    gap: 80px;
-    margin: 0 auto;
-    width: fit-content;
-    align-items: center;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  }
-  .dashboard {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .requests-container {
-    color: white;
-    height: 250px;
-    width: 400px;
-    padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    background: #0da1db;
-    background: linear-gradient(
-      214deg,
-      rgba(13, 161, 219, 0.6) 0%,
-      rgba(46, 134, 179, 0.57) 50%,
-      rgba(36, 164, 214, 0.69) 100%
-    );
-  }
-  .request-form {
-    color: white;
-    padding: 20px;
-    height: 520px;
-    width: 400px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    background: #0da1db;
-    background: linear-gradient(
-      214deg,
-      rgba(13, 161, 219, 0.6) 0%,
-      rgba(46, 134, 179, 0.57) 50%,
-      rgba(36, 164, 214, 0.69) 100%
-    );
-  }
-  .request-form .form {
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-      rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    border-radius: 20px;
-  }
-  .form-field {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-  }
+{% extends "student_layout.html" %}
 
-  .form-field input {
-    width: 300px;
-  }
-</style>
-{% endblock %} {% block content %}
-<div class="container" style="margin-top: 20px">
-  {# flash messages #} {% with messages =
-  get_flashed_messages(with_categories=true) %} {% if messages %} {% for
-  category, msg in messages %}
-  <div
-    id="flash-message"
-    class="card-panel {{ 'red lighten-4' if category == 'error' else 'green lighten-4' }}"
-  >
-    {{ msg }}
-  </div>
-  {% endfor %} {% endif %} {% endwith %}
+{% block content %}
+<div class="container student-page">
 
-  <div class="sub-container">
-    <div id="dashboard" class="dashboard">
-      <div id="recent-requests" class="requests-container">
-        <h5>Closed Requests</h5>
-        <h6>Approved Request</h6>
-        {%for request in approved_request %}
-        <p>
-          Title: {{request.title}} | Hours: {{request.hours}} | Description:
-          {{request.description}} |
-        </p>
-        {%endfor%}
-        <h6>Denied Request</h6>
-        {%for request in denied_requests %}
-        <p>
-          Title: {{request.title}} | Hours: {{request.hours}} | Description:
-          {{request.description}} |
-        </p>
-        {%endfor%}
+  {# flash messages #}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <div id="flash-message" class="card-panel
+                    {% if category == 'error' %}
+                      student-flash-error
+                    {% else %}
+                      student-flash-success
+                    {% endif %}">
+          {{ msg }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="student-main">
+    <div class="sub-container">
+
+      <!-- LEFT COLUMN: PENDING ON TOP, CLOSED BELOW -->
+      <div id="dashboard" class="dashboard">
+
+        <!-- PENDING REQUESTS (top) -->
+        <div id="pending-requests" class="requests-container">
+          <h5 class="requests-container-title">Pending Requests</h5>
+
+          <div class="requests-container-list">
+            {% if pending_requests %}
+              {% for request in pending_requests %}
+                <div class="request-item">
+                  <div class="request-item-header">
+                    <span class="request-item-title">{{ request.title }}</span>
+                    <span class="request-item-hours">{{ request.hours }} hrs</span>
+                  </div>
+                  <p class="request-item-desc">
+                    {{ request.description or 'No description provided.' }}
+                  </p>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p class="requests-empty">
+                You have no pending requests at this time.
+              </p>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- CLOSED REQUESTS (bottom) -->
+        <div id="recent-requests" class="requests-container">
+          <h5 class="requests-container-title">Closed Requests</h5>
+
+          <h6>Approved Request</h6>
+          <div class="requests-container-list">
+            {% if approved_request %}
+              {% for request in approved_request %}
+                <div class="request-item">
+                  <div class="request-item-header">
+                    <span class="request-item-title">{{ request.title }}</span>
+                    <span class="request-item-hours">{{ request.hours }} hrs</span>
+                  </div>
+                  <p class="request-item-desc">
+                    {{ request.description or 'No description provided.' }}
+                  </p>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p class="requests-empty">No approved requests.</p>
+            {% endif %}
+          </div>
+
+          <h6 style="margin-top: 18px;">Denied Request</h6>
+          <div class="requests-container-list">
+            {% if denied_requests %}
+              {% for request in denied_requests %}
+                <div class="request-item">
+                  <div class="request-item-header">
+                    <span class="request-item-title">{{ request.title }}</span>
+                    <span class="request-item-hours">{{ request.hours }} hrs</span>
+                  </div>
+                  <p class="request-item-desc">
+                    {{ request.description or 'No description provided.' }}
+                  </p>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p class="requests-empty">No denied requests.</p>
+            {% endif %}
+          </div>
+        </div>
+
       </div>
 
-      <div id="pending-requests" class="requests-container">
-        <h5>Pending Requests</h5>
-        {%for request in pending_requests %}
-        <p>
-          Title: {{request.title}} | Hours: {{request.hours}} | Description:
-          {{request.description}} |
+      <!-- RIGHT COLUMN: REQUEST FORM -->
+      <div id="request-form" class="request-form">
+        <h5 class="requests-container-title">Request Hours</h5>
+        <p class="request-form-subtitle">
+          Submit a new request for hours to be reviewed by your staff supervisor.
         </p>
-        {%endfor%}
-      </div>
-    </div>
-    <div id="request-form" class="request-form">
-      <h5>Request Hours</h5>
-      <div class="form">
-        <form
-          id="requestForm"
-          method="POST"
-          action="/student/home"
-          style="padding: 1em"
-        >
-          <div class="form-field">
-            <div>Title:</div>
-            <div class="input-field col s12">
-              <input
-                id="title"
-                name="title"
-                type="text"
-                class="validate"
-                style="color: white"
-                required
-              />
-              <label for="title"></label>
+
+        <div class="form">
+          <form id="requestForm" method="POST" action="/student/home">
+
+            <div class="form-field">
+              <div>Title:</div>
+              <div class="input-field col s12">
+                <input id="title" name="title" type="text" class="validate" required />
+                <label for="title"></label>
+                <span class="field-hint">
+                  e.g. Community service project, club meeting, event name
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="form-field">
-            <div>Hours:</div>
-            <div class="input-field col s12">
-              <input
-                name="hours"
-                id="hours"
-                type="text"
-                class="validate"
-                style="color: white"
-                required
-              />
-              <label for="hours"></label>
+
+            <div class="form-field">
+              <div>Hours:</div>
+              <div class="input-field col s12">
+                <input name="hours" id="hours" type="text" class="validate" required />
+                <label for="hours"></label>
+                <span class="field-hint">
+                  Enter the number of hours, e.g. 2 or 2.5
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="form-field">
-            <div>Description:</div>
-            <div class="input-field col s12">
-              <textarea id="textarea1" class="materialize-textarea"></textarea>
-              <label for="textarea1"></label>
+
+            <div class="form-field">
+              <div>Description:</div>
+              <div class="input-field col s12">
+                <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
+                <label for="textarea1"></label>
+                <span class="field-hint">
+                  Brief summary of what you did (optional but helpful).
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="row justify-content">
-            <div class="col s6">
-              <button type="reset" class="btn grey lighten-1 waves-effect">
-                Clear
+
+            <div class="row justify-content actions-row">
+              <div class="col s6">
+                <button type="reset" class="btn grey lighten-1 waves-effect">
+                  Clear
+                </button>
+              </div>
+              <button type="submit" class="btn green lighten-2 waves-effect">
+                Submit
               </button>
             </div>
-            <button type="submit" class="btn green lighten-2 waves-effect">
-              Submit
-            </button>
-          </div>
-        </form>
+
+          </form>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
+{% endblock %}
+
 {% block scripts %}
 <script>
   setTimeout(() => {
@@ -175,4 +168,4 @@
     });
   }, 5000);
 </script>
-{%endblock%} {% endblock %}
+{% endblock %}
