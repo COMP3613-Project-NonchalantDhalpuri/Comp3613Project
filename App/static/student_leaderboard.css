@@ -1,0 +1,214 @@
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(180deg, #f6fff9 0%, #edf5f0 100%);
+    font-family: "Quicksand", sans-serif;
+    color: #1b4332;
+    overflow-x: hidden;
+}
+
+
+.student-nav {
+    background-color: #a8e6cf;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.student-nav a {
+    color: #1b4332;
+    font-weight: 500;
+}
+
+.student-nav a:hover {
+    background-color: rgba(255,255,255,0.35);
+}
+
+
+.staff-nav {
+    background-color: #a8e6cf;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.staff-nav a {
+    color: #1b4332;
+    font-weight: 500;
+}
+
+.staff-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+
+.active-tab {
+    background-color: rgba(255,255,255,0.55);
+    border-radius: 999px;
+}
+
+.nav-app-title {
+    margin-right: 18px;
+    font-size: 0.95rem;
+    color: #1b4332;
+}
+
+
+.leaderboard-page {
+    max-width: 1100px;
+    margin: 70px auto 24px;
+    padding: 0 40px;
+}
+
+.header-card {
+    background-color: #a8e6cf;
+    padding: 14px 20px;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.header-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+
+.list-card {
+    background-color: #cfe8ff;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+.leader-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.6);
+}
+
+.leader-row:nth-child(even) {
+    background-color: #beddff;
+}
+
+
+
+.leader-name {
+    font-weight: 600;
+}
+
+.leader-hours {
+    font-size: 0.9rem;
+    color: #355070;
+}
+
+
+.leader-middle {
+    max-width: 260px;
+    flex: 1;
+    margin: 0 20px;
+}
+
+.leader-label {
+    font-size: 0.8rem;
+    color: #355070;
+    margin-bottom: 4px;
+}
+
+.leader-badges {
+    display: flex;
+    gap: 6px;
+}
+
+.badge-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffe066;
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
+
+.no-accolades {
+    font-size: 0.85rem;
+    color: #7b8b80;
+}
+
+
+.leader-right {
+    font-size: 1.4rem;
+    font-weight: 700;
+    min-width: 32px;
+    text-align: right;
+    color: #1b4332;
+}
+
+
+.leader-footer {
+    max-width: 1100px;
+    margin: 12px auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    color: #355070;
+    font-size: 0.95rem;
+}
+
+
+@media (max-width: 900px) {
+    .leader-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .leader-middle {
+        max-width: 100%;
+        margin: 6px 0;
+    }
+
+    .leader-right {
+        align-self: flex-end;
+    }
+
+    .leader-footer {
+        padding: 0 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .student-nav .nav-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4px 8px;
+    }
+
+    .student-nav .brand-logo {
+        position: static;          
+        transform: none;
+        font-size: 1.2rem;
+        margin-left: 4px;
+        margin-bottom: 4px;
+    }
+
+    .student-nav ul#nav-mobile {
+        float: none;
+        position: static;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;           
+        gap: 4px;
+    }
+
+    .student-nav ul#nav-mobile li {
+        margin: 0;
+    }
+
+    .student-nav ul#nav-mobile li a {
+        padding: 4px 10px;
+        font-size: 0.85rem;
+    }
+}
