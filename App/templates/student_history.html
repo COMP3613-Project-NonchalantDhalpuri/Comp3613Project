@@ -1,11 +1,14 @@
 {% extends "student_layout.html" %} {% block styles %}
+{{ super() }}
 
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='student_history_page_style.css') }}"
 />
 
-{% endblock %} {% block content %}
+{% endblock %} 
+
+{% block content %}
 <div class="container history-page" style="margin-top: 20px">
   {# flash messages #} {% with messages =
   get_flashed_messages(with_categories=true) %} {% if messages %} {% for
