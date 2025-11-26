@@ -1,111 +1,111 @@
-{% extends "layout.html" %}
-{% set active_tab = 'leaderboards' %}
+{% extends "layout.html" %} {% set active_tab = 'leaderboards' %} {% block title
+%}Leaderboards{% endblock %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='student_leaderboard.css') }}"
+/>
+{% endblock %} {% block navbar %} {% if viewer_is_student %}
+<nav class="student-nav">
+  <div class="nav-wrapper">
+    <a class="brand-logo left">
+      {% if current_user %} Welcome {{ current_user.name }}! {% else %} Welcome
+      ! {% endif %}
+    </a>
 
-{% block title %}Leaderboards{% endblock %}
+    <ul id="nav-mobile" class="right">
+      <li>
+        <a
+          href="{{ url_for('student_views.student_home_page') }}"
+          class="{% if active_tab == 'home' %}active-tab{% endif %}"
+        >
+          Home
+        </a>
+      </li>
 
-{% block styles %}
-  {{ super() }}
-   <link rel="stylesheet" href="{{ url_for('static', filename='student_leaderboard.css') }}">
-{% endblock %}
+      <li>
+        <a
+          href="{{ url_for('index_views.leaderboard_page') }}"
+          class="{% if active_tab == 'leaderboards' %}active-tab{% endif %}"
+        >
+          Leaderboards
+        </a>
+      </li>
 
+      <li>
+        <a
+          href="{{ url_for('student_views.student_accolades_page') }}"
+          class="{% if active_tab == 'accolades' %}active-tab{% endif %}"
+        >
+          Accolades
+        </a>
+      </li>
 
-{% block navbar %}
-  {% if viewer_is_student %}
-  <nav class="student-nav">
-    <div class="nav-wrapper">
-      <a class="brand-logo left">
-        {% if current_user %}
-          Welcome {{ current_user.name }}!
-        {% else %}
-          Welcome !
-        {% endif %}
-      </a>
+      <li>
+        <a
+          href="{{url_for('student_views.student_history_page')}}"
+          class="{% if active_tab == 'history' %}active-tab{% endif %}"
+        >
+          History
+        </a>
+      </li>
 
-      <ul id="nav-mobile" class="right">
-        <li>
-          <a href="{{ url_for('index_views.student_home_page') }}"
-             class="{% if active_tab == 'home' %}active-tab{% endif %}">
-            Home
-          </a>
-        </li>
+      <li>
+        <a href="{{ url_for('auth_views.logout_action') }}">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-        <li>
-          <a href="{{ url_for('index_views.leaderboard_page') }}"
-             class="{% if active_tab == 'leaderboards' %}active-tab{% endif %}">
-            Leaderboards
-          </a>
-        </li>
+{% else %}
+<nav class="staff-nav">
+  <div class="nav-wrapper">
+    <a class="brand-logo left"> Welcome ! </a>
 
-        <li>
-          <a href="{{ url_for('index_views.student_accolades_page') }}"
-             class="{% if active_tab == 'accolades' %}active-tab{% endif %}">
-            Accolades
-          </a>
-        </li>
+    <ul id="nav-mobile" class="right">
+      <li>
+        <a
+          href="{{ url_for('staff_views.staff_home_page') }}"
+          class="{% if active_tab == 'home' %}active-tab{% endif %}"
+        >
+          Home
+        </a>
+      </li>
 
-        <li>
-          <a href="#"
-             class="{% if active_tab == 'history' %}active-tab{% endif %}">
-            History
-          </a>
-        </li>
+      <li>
+        <a
+          href="{{ url_for('staff_views.staff_pending_requests_page')}}"
+          class="{% if active_tab == 'requests' %}active-tab{% endif %}"
+        >
+          Requests
+        </a>
+      </li>
 
-        <li>
-          <a href="{{ url_for('auth_views.logout_action') }}">Log Out</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+      <li>
+        <a
+          href="{{ url_for('index_views.leaderboard_page') }}"
+          class="{% if active_tab == 'leaderboards' %}active-tab{% endif %}"
+        >
+          Leaderboards
+        </a>
+      </li>
 
-  {% else %}
-  <nav class="staff-nav">
-    <div class="nav-wrapper">
-      <a class="brand-logo left">
-        Welcome !
-      </a>
+      <li>
+        <a
+          href="{{ url_for('staff_views.staff_student_hours_page') }}"
+          class="{% if active_tab == 'student_hours' %}active-tab{% endif %}"
+        >
+          Student Hours
+        </a>
+      </li>
 
-      <ul id="nav-mobile" class="right">
-        <li>
-          <a href="{{ url_for('index_views.staff_home_page') }}"
-             class="{% if active_tab == 'home' %}active-tab{% endif %}">
-            Home
-          </a>
-        </li>
-
-        <li>
-          <a href="#"
-             class="{% if active_tab == 'requests' %}active-tab{% endif %}">
-            Requests
-          </a>
-        </li>
-
-        <li>
-          <a href="{{ url_for('index_views.leaderboard_page') }}"
-             class="{% if active_tab == 'leaderboards' %}active-tab{% endif %}">
-            Leaderboards
-          </a>
-        </li>
-
-        <li>
-          <a href="{{ url_for('index_views.staff_student_hours_page') }}"
-             class="{% if active_tab == 'student_hours' %}active-tab{% endif %}">
-            Student Hours
-          </a>
-        </li>
-
-        <li>
-          <a href="{{ url_for('auth_views.logout_action') }}">Log Out</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  {% endif %}
-
-{% endblock %}
-
-{% block content %}
+      <li>
+        <a href="{{ url_for('auth_views.logout_action') }}">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endif %} {% endblock %} {% block content %}
 <div class="leaderboard-page">
-
   <div class="header-card">
     <div class="header-text">Student Hour Rankings</div>
   </div>
@@ -113,10 +113,7 @@
   <div class="list-card">
     {% for s in leaders %}
     <div class="leader-row">
-
       <div class="leader-left">
-        
-
         <div>
           <div class="leader-name">{{ s.name }}</div>
           <div class="leader-hours">
@@ -128,18 +125,15 @@
       <div class="leader-middle">
         <div class="leader-label">Accolades</div>
         <div class="leader-badges">
-          {% if s.accolades %}
-            {% for a in s.accolades %}
-              <span class="badge-icon">{{ a[0] }}</span>
-            {% endfor %}
-          {% else %}
-            <span class="no-accolades">None yet</span>
+          {% if s.accolades %} {% for a in s.accolades %}
+          <span class="badge-icon">{{ a[0] }}</span>
+          {% endfor %} {% else %}
+          <span class="no-accolades">None yet</span>
           {% endif %}
         </div>
       </div>
 
       <div class="leader-right">{{ loop.index }}</div>
-
     </div>
     {% endfor %}
   </div>
@@ -150,6 +144,5 @@
     <span>Your Rank: {{ user_rank if user_rank else "—" }}</span>
   </div>
   {% endif %}
-
 </div>
 {% endblock %}

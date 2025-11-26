@@ -1,51 +1,39 @@
-{% extends "student_layout.html" %}
-
-{% block content %}
+{% extends "student_layout.html" %} {% block content %}
 <div class="container student-page">
-
-  {# flash messages #}
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, msg in messages %}
-        <div id="flash-message" class="card-panel
-                    {% if category == 'error' %}
-                      student-flash-error
-                    {% else %}
-                      student-flash-success
-                    {% endif %}">
-          {{ msg }}
-        </div>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
+  {# flash messages #} {% with messages =
+  get_flashed_messages(with_categories=true) %} {% if messages %} {% for
+  category, msg in messages %}
+  <div
+    id="flash-message"
+    class="card-panel {% if category == 'error' %} student-flash-error {% else %} student-flash-success {% endif %}"
+  >
+    {{ msg }}
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
 
   <div class="student-main">
     <div class="sub-container">
-
       <!-- LEFT COLUMN: PENDING ON TOP, CLOSED BELOW -->
       <div id="dashboard" class="dashboard">
-
         <!-- PENDING REQUESTS (top) -->
         <div id="pending-requests" class="requests-container">
           <h5 class="requests-container-title">Pending Requests</h5>
 
           <div class="requests-container-list">
-            {% if pending_requests %}
-              {% for request in pending_requests %}
-                <div class="request-item">
-                  <div class="request-item-header">
-                    <span class="request-item-title">{{ request.title }}</span>
-                    <span class="request-item-hours">{{ request.hours }} hrs</span>
-                  </div>
-                  <p class="request-item-desc">
-                    {{ request.description or 'No description provided.' }}
-                  </p>
-                </div>
-              {% endfor %}
-            {% else %}
-              <p class="requests-empty">
-                You have no pending requests at this time.
+            {% if pending_requests %} {% for request in pending_requests %}
+            <div class="request-item">
+              <div class="request-item-header">
+                <span class="request-item-title">{{ request.title }}</span>
+                <span class="request-item-hours">{{ request.hours }} hrs</span>
+              </div>
+              <p class="request-item-desc">
+                {{ request.description or 'No description provided.' }}
               </p>
+            </div>
+            {% endfor %} {% else %}
+            <p class="requests-empty">
+              You have no pending requests at this time.
+            </p>
             {% endif %}
           </div>
         </div>
@@ -56,59 +44,60 @@
 
           <h6>Approved Request</h6>
           <div class="requests-container-list">
-            {% if approved_request %}
-              {% for request in approved_request %}
-                <div class="request-item">
-                  <div class="request-item-header">
-                    <span class="request-item-title">{{ request.title }}</span>
-                    <span class="request-item-hours">{{ request.hours }} hrs</span>
-                  </div>
-                  <p class="request-item-desc">
-                    {{ request.description or 'No description provided.' }}
-                  </p>
-                </div>
-              {% endfor %}
-            {% else %}
-              <p class="requests-empty">No approved requests.</p>
+            {% if approved_requests %} {% for request in approved_requests %}
+            <div class="request-item">
+              <div class="request-item-header">
+                <span class="request-item-title">{{ request.title }}</span>
+                <span class="request-item-hours">{{ request.hours }} hrs</span>
+              </div>
+              <p class="request-item-desc">
+                {{ request.description or 'No description provided.' }}
+              </p>
+            </div>
+            {% endfor %} {% else %}
+            <p class="requests-empty">No approved requests.</p>
             {% endif %}
           </div>
 
-          <h6 style="margin-top: 18px;">Denied Request</h6>
+          <h6 style="margin-top: 18px">Denied Request</h6>
           <div class="requests-container-list">
-            {% if denied_requests %}
-              {% for request in denied_requests %}
-                <div class="request-item">
-                  <div class="request-item-header">
-                    <span class="request-item-title">{{ request.title }}</span>
-                    <span class="request-item-hours">{{ request.hours }} hrs</span>
-                  </div>
-                  <p class="request-item-desc">
-                    {{ request.description or 'No description provided.' }}
-                  </p>
-                </div>
-              {% endfor %}
-            {% else %}
-              <p class="requests-empty">No denied requests.</p>
+            {% if denied_requests %} {% for request in denied_requests %}
+            <div class="request-item">
+              <div class="request-item-header">
+                <span class="request-item-title">{{ request.title }}</span>
+                <span class="request-item-hours">{{ request.hours }} hrs</span>
+              </div>
+              <p class="request-item-desc">
+                {{ request.description or 'No description provided.' }}
+              </p>
+            </div>
+            {% endfor %} {% else %}
+            <p class="requests-empty">No denied requests.</p>
             {% endif %}
           </div>
         </div>
-
       </div>
 
       <!-- RIGHT COLUMN: REQUEST FORM -->
       <div id="request-form" class="request-form">
         <h5 class="requests-container-title">Request Hours</h5>
         <p class="request-form-subtitle">
-          Submit a new request for hours to be reviewed by your staff supervisor.
+          Submit a new request for hours to be reviewed by your staff
+          supervisor.
         </p>
 
         <div class="form">
           <form id="requestForm" method="POST" action="/student/home">
-
             <div class="form-field">
               <div>Title:</div>
               <div class="input-field col s12">
-                <input id="title" name="title" type="text" class="validate" required />
+                <input
+                  id="title"
+                  name="title"
+                  type="text"
+                  class="validate"
+                  required
+                />
                 <label for="title"></label>
                 <span class="field-hint">
                   e.g. Community service project, club meeting, event name
@@ -119,7 +108,13 @@
             <div class="form-field">
               <div>Hours:</div>
               <div class="input-field col s12">
-                <input name="hours" id="hours" type="text" class="validate" required />
+                <input
+                  name="hours"
+                  id="hours"
+                  type="text"
+                  class="validate"
+                  required
+                />
                 <label for="hours"></label>
                 <span class="field-hint">
                   Enter the number of hours, e.g. 2 or 2.5
@@ -130,7 +125,11 @@
             <div class="form-field">
               <div>Description:</div>
               <div class="input-field col s12">
-                <textarea id="textarea1" name="description" class="materialize-textarea"></textarea>
+                <textarea
+                  id="textarea1"
+                  name="description"
+                  class="materialize-textarea"
+                ></textarea>
                 <label for="textarea1"></label>
                 <span class="field-hint">
                   Brief summary of what you did (optional but helpful).
@@ -148,17 +147,13 @@
                 Submit
               </button>
             </div>
-
           </form>
         </div>
-
       </div>
     </div>
   </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script>
   setTimeout(() => {
     document.querySelectorAll("#flash-message").forEach((msg) => {

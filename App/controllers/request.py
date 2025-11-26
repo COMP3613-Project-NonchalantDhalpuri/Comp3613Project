@@ -67,6 +67,7 @@ def approve_request(staff_id, request_id): #staff approves a student's hours req
         raise ValueError(f"Request with id {request_id} not found.")
     
     student = get_student_by_id(request.student_id)
+    request.staff_id = staff_id
 
     approval = ApproveRequestCommand(request, student)
     approval.execute()
@@ -83,6 +84,7 @@ def process_request_denial(staff_id, request_id):
         raise ValueError(f"Request with id {request_id} not found.")
     
     student = get_student_by_id(request.student_id)
+    request.staff_id = staff_id
 
     denial = DenyRequestCommand(request, student)
     denial.execute()

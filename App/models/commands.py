@@ -22,7 +22,7 @@ class ApproveRequestCommand(Command):
         activity = ActivityHistory(
             student_id=self.student.id,
             staff_id=self.request.staff_id,
-            request_id = self.request_id,
+            request_id = self.request.id,
             title=self.request.title,
             hours=self.request.hours,
             action='approved',
@@ -33,8 +33,9 @@ class ApproveRequestCommand(Command):
         db.session.commit()
 
 class DenyRequestCommand(Command):
-    def __init__(self, request):
+    def __init__(self, request, student):
         self.request = request
+        self.student = student
 
     def execute(self):
         self.request.status = 'denied'
@@ -42,7 +43,7 @@ class DenyRequestCommand(Command):
         activity = ActivityHistory(
             student_id=self.student.id,
             staff_id=self.request.staff_id,
-            request_id = self.request_id,
+            request_id = self.request.id,
             title=self.request.title,
             hours=self.request.hours,
             action='denied',

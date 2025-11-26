@@ -1,69 +1,68 @@
-{% extends "staff_layout.html" %}
-
-{% block content %}
+{% extends "staff_layout.html" %} {% block content %}
 <div class="container staff-page">
-
-  {# flash messages #}
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, msg in messages %}
-        <div class="card-panel
-                    {% if category == 'error' %}
-                      staff-flash-error
-                    {% else %}
-                      staff-flash-success
-                    {% endif %}">
-          {{ msg }}
-        </div>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
+  {# flash messages #} {% with messages =
+  get_flashed_messages(with_categories=true) %} {% if messages %} {% for
+  category, msg in messages %}
+  <div
+    id="flash-message"
+    class="card-panel {% if category == 'error' %} staff-flash-error {% else %} staff-flash-success {% endif %}"
+  >
+    {{ msg }}
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
 
   <div class="staff-main">
-
-
     <div class="staff-header">
       <h3>Log Student Activity Hours</h3>
       <p>
-        Search for a student on the left, review their details,
-        then record the hours completed in the form on the right.
+        Search for a student on the left, review their details, then record the
+        hours completed in the form on the right.
       </p>
     </div>
 
     <div class="staff-forms-row">
-
       <div class="staff-form-col">
         <div class="card staff-card">
           <div class="card-content">
             <span class="card-title"><b>Select student</b></span>
 
-            <form method="get" action="{{ url_for('index_views.staff_home_page') }}">
+            <form
+              method="get"
+              action="{{ url_for('staff_views.staff_home_page') }}"
+            >
               <div class="input-field">
-                <input id="student_id" name="student_id" type="number" min="1"
-                       value="{{ selected_student.id if selected_student else '' }}">
+                <input
+                  id="student_id"
+                  name="student_id"
+                  type="number"
+                  min="1"
+                  value="{{ selected_student.id if selected_student else '' }}"
+                />
                 <label for="student_id" class="active">Student ID</label>
               </div>
 
-              <button type="submit"
-                      class="btn staff-btn-primary waves-effect">
+              <button type="submit" class="btn staff-btn-primary waves-effect">
                 Find
               </button>
             </form>
 
             <div class="staff-summary">
               {% if selected_student %}
-                <p class="staff-summary-title">Selected student</p>
-                <p><strong>ID:</strong> {{ selected_student.id }}</p>
-                <p><strong>Name:</strong> {{ selected_student.name }}</p>
-                <p><strong>Total logged hours:</strong> {{ selected_student.hoursAccumulated }}</p>
+              <p class="staff-summary-title">Selected student</p>
+              <p><strong>ID:</strong> {{ selected_student.id }}</p>
+              <p><strong>Name:</strong> {{ selected_student.name }}</p>
+              <p>
+                <strong>Total logged hours:</strong> {{
+                selected_student.hoursAccumulated }}
+              </p>
               {% else %}
-                <p class="staff-empty-state">
-                  No student selected yet. Enter a student ID and click <strong>Find</strong>
-                  to view their details.
-                </p>
+              <p class="staff-empty-state">
+                No student selected yet. Enter a student ID and click
+                <strong>Find</strong>
+                to view their details.
+              </p>
               {% endif %}
             </div>
-
           </div>
         </div>
       </div>
@@ -73,32 +72,45 @@
           <div class="card-content">
             <span class="card-title"><b>Log hours</b></span>
 
-            <form method="post"
-                  action="{{ url_for('index_views.staff_home_page') }}"
-                  onsubmit="return confirm('Are you sure you want to complete this log?');">
-
-              <input type="hidden" name="student_id"
-                     value="{{ selected_student.id if selected_student else '' }}">
+            <form
+              method="post"
+              action="{{ url_for('staff_views.staff_home_page') }}"
+              onsubmit="return confirm('Are you sure you want to complete this log?');"
+            >
+              <input
+                type="hidden"
+                name="student_id"
+                value="{{ selected_student.id if selected_student else '' }}"
+              />
 
               <!-- Title -->
               <div class="input-field">
-                <input id="title" name="title" type="text" required>
+                <input id="title" name="title" type="text" required />
                 <label for="title" class="active">Title</label>
                 <span class="field-hint">e.g. Community service project</span>
               </div>
 
               <!-- Hours -->
               <div class="input-field">
-                <input id="hours" name="hours" type="number"
-                       step="0.5" min="0" required>
+                <input
+                  id="hours"
+                  name="hours"
+                  type="number"
+                  step="0.5"
+                  min="0"
+                  required
+                />
                 <label for="hours" class="active">Hours</label>
                 <span class="field-hint">e.g. 2.5</span>
               </div>
 
               <!-- Description -->
               <div class="input-field">
-                <textarea id="description" name="description"
-                          class="materialize-textarea"></textarea>
+                <textarea
+                  id="description"
+                  name="description"
+                  class="materialize-textarea"
+                ></textarea>
                 <label for="description" class="active">Description</label>
                 <span class="field-hint">
                   Brief description of the activity (optional)
@@ -107,29 +119,44 @@
 
               <div class="row staff-form-actions">
                 <div class="col s6">
-                  <button type="reset"
-                          class="btn staff-btn-secondary waves-effect">
+                  <button
+                    type="reset"
+                    class="btn staff-btn-secondary waves-effect"
+                  >
                     Clear
                   </button>
                 </div>
                 <div class="col s6 right-align">
-                  <button type="submit"
-                          class="btn staff-btn-primary waves-effect"
-                          {% if not selected_student %}disabled{% endif %}>
+                  <button
+                    type="submit"
+                    class="btn staff-btn-primary waves-effect"
+                    {%
+                    if
+                    not
+                    selected_student
+                    %}disabled{%
+                    endif
+                    %}
+                  >
                     Log
                   </button>
                 </div>
               </div>
-
             </form>
-
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
-
 </div>
+{% endblock %} {% block scripts %}
+<script>
+  setTimeout(() => {
+    document.querySelectorAll("#flash-message").forEach((msg) => {
+      msg.style.transition = "opacity 0.5s";
+      msg.style.opacity = 0;
+      setTimeout(() => msg.remove(), 500);
+    });
+  }, 5000);
+</script>
 {% endblock %}

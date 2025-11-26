@@ -19,7 +19,7 @@
 
       <!-- HOME -->
       <li>
-        <a href="{{ url_for('index_views.staff_home_page') }}"
+        <a href="{{ url_for('staff_views.staff_home_page') }}"
            {% if active_tab == 'home' %}class="active-tab"{% endif %}>
           Home
         </a>
@@ -35,7 +35,7 @@
 
       <!-- LEADERBOARDS -->
       <li>
-        <a href="#"
+        <a href="{{ url_for('index_views.leaderboard_page')}}"
            {% if active_tab == 'leaderboards' %}class="active-tab"{% endif %}>
           Leaderboards
         </a>
@@ -43,7 +43,7 @@
 
       <!-- STUDENT HOURS -->
       <li>
-        <a href="{{ url_for('index_views.staff_student_hours_page') }}"
+        <a href="{{ url_for('staff_views.staff_student_hours_page') }}"
            {% if active_tab == 'student_hours' %}class="active-tab"{% endif %}>
           Student Hours
         </a>

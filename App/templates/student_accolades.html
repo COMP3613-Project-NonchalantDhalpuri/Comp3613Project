@@ -1,20 +1,19 @@
-{% extends "student_layout.html" %}
-{% set active_tab = 'accolades' %}
-
-{% block title %}Student Accolades{% endblock %}
-
-{% block styles %}
-  {{ super() }}
-  <link rel="stylesheet" href="{{ url_for('static', filename='student_accolades_style.css') }}">
-{% endblock %}
-
-{% block content %}
+{% extends "student_layout.html" %} {% set active_tab = 'accolades' %} {% block
+title %}Student Accolades{% endblock %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='student_accolades_style.css') }}"
+/>
+{% endblock %} {% block content %}
 <div class="student-page">
   <div class="student-main">
     <div class="accolades-wrapper">
       <div class="accolades-header">
         <h3>Your Accolades & Progress</h3>
-        <p>Track your milestones and achievements earned through community service.</p>
+        <p>
+          Track your milestones and achievements earned through community
+          service.
+        </p>
       </div>
 
       <div class="accolades-layout">
@@ -33,7 +32,10 @@
               </div>
 
               <div class="progress-bar">
-                <div class="progress-fill" style="width: {{ progress_percent }}%;"></div>
+                <div
+                  class="progress-fill"
+                  style="width: {{ progress_percent }}%;"
+                ></div>
               </div>
 
               {% if next_milestone %}
@@ -52,30 +54,40 @@
           <div class="milestones-card">
             <div class="milestones-header">
               <h5>Recent Milestones</h5>
-              <span class="milestone-count">{{ recent_milestones|length }}</span>
+              <span class="milestone-count"
+                >{{ recent_milestones|length }}</span
+              >
             </div>
 
             <div class="milestones-list">
-              {% if recent_milestones %}
-                {% for m in recent_milestones|sort(attribute='achieved_at', reverse=True) %}
-                <div class="milestone-item">
-                  <div class="milestone-icon">⭐</div>
-                  <div class="milestone-info">
-                    <p class="milestone-name">{{ m.name }}</p>
-                    {% if m.hours_required %}
-                    <p class="milestone-requirement">{{ m.hours_required }} hours</p>
-                    {% endif %}
-                    {% if m.achieved_at %}
-                    <p class="milestone-date">{{ m.achieved_at.strftime('%b %d, %Y') }}</p>
-                    {% endif %}
-                  </div>
-                  <a href="{{ url_for('index_views.student_accolades_page', milestone_id=m.id) }}" class="milestone-link">
-                    Details →
-                  </a>
+              {% if recent_milestones %} {% for m in
+              recent_milestones|sort(attribute='achieved_at', reverse=True) %}
+              <div class="milestone-item">
+                <div class="milestone-icon">⭐</div>
+                <div class="milestone-info">
+                  <p class="milestone-name">{{ m.name }}</p>
+                  {% if m.hours_required %}
+                  <p class="milestone-requirement">
+                    {{ m.hours_required }} hours
+                  </p>
+                  {% endif %} {% if m.achieved_at %}
+                  <p class="milestone-date">
+                    {{ m.achieved_at.strftime('%b %d, %Y') }}
+                  </p>
+                  {% endif %}
                 </div>
-                {% endfor %}
-              {% else %}
-                <p class="empty-state">No milestones achieved yet. Start logging hours to earn your first milestone!</p>
+                <a
+                  href="{{ url_for('student_views.student_accolades_page', milestone_id=m.id) }}"
+                  class="milestone-link"
+                >
+                  Details →
+                </a>
+              </div>
+              {% endfor %} {% else %}
+              <p class="empty-state">
+                No milestones achieved yet. Start logging hours to earn your
+                first milestone!
+              </p>
               {% endif %}
             </div>
           </div>
@@ -91,22 +103,26 @@
 
             <div class="details-content">
               {% if selected_milestone %}
-                <div class="selected-milestone">
-                  <div class="milestone-badge">⭐</div>
-                  <h6 class="milestone-title">{{ selected_milestone.name }}</h6>
-                  {% if selected_milestone.hours_required %}
-                  <p class="milestone-requirement-detail">
-                    <strong>Requirement:</strong> {{ selected_milestone.hours_required }} hours
-                  </p>
-                  {% endif %}
-                  <p class="milestone-description">
-                    {{ selected_milestone.description or "No additional description provided." }}
-                  </p>
-                </div>
+              <div class="selected-milestone">
+                <div class="milestone-badge">⭐</div>
+                <h6 class="milestone-title">{{ selected_milestone.name }}</h6>
+                {% if selected_milestone.hours_required %}
+                <p class="milestone-requirement-detail">
+                  <strong>Requirement:</strong> {{
+                  selected_milestone.hours_required }} hours
+                </p>
+                {% endif %}
+                <p class="milestone-description">
+                  {{ selected_milestone.description or "No additional
+                  description provided." }}
+                </p>
+              </div>
               {% else %}
-                <div class="empty-selection">
-                  <p class="selection-prompt">👈 Select a milestone from the list to view its details.</p>
-                </div>
+              <div class="empty-selection">
+                <p class="selection-prompt">
+                  👈 Select a milestone from the list to view its details.
+                </p>
+              </div>
               {% endif %}
             </div>
           </div>
@@ -119,17 +135,20 @@
             </div>
 
             <div class="badges-grid">
-              {% if awarded_accolades %}
-                {% for a in awarded_accolades %}
-                <div class="badge-item" title="{{ a.name }}">
-                  <a href="{{ url_for('index_views.student_accolades_page', accolade_id=a.id) }}" class="badge-link">
-                    <div class="badge-circle">🏆</div>
-                    <p class="badge-name">{{ a.name }}</p>
-                  </a>
-                </div>
-                {% endfor %}
-              {% else %}
-                <p class="empty-badges">Keep working towards your milestones to earn badges!</p>
+              {% if awarded_accolades %} {% for a in awarded_accolades %}
+              <div class="badge-item" title="{{ a.name }}">
+                <a
+                  href="{{ url_for('student_views.student_accolades_page', accolade_id=a.id) }}"
+                  class="badge-link"
+                >
+                  <div class="badge-circle">🏆</div>
+                  <p class="badge-name">{{ a.name }}</p>
+                </a>
+              </div>
+              {% endfor %} {% else %}
+              <p class="empty-badges">
+                Keep working towards your milestones to earn badges!
+              </p>
               {% endif %}
             </div>
           </div>

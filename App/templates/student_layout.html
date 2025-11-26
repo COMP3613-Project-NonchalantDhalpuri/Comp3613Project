@@ -18,7 +18,7 @@
     <ul id="nav-mobile" class="right">
 
       <li>
-        <a href="{{ url_for('index_views.student_home_page') }}"
+        <a href="{{ url_for('student_views.student_home_page') }}"
            {% if active_tab == 'home' %}class="active-tab"{% endif %}>
           Home
         </a>
@@ -32,7 +32,7 @@
       </li>
 
       <li>
-        <a href="{{ url_for('index_views.student_accolades_page') }}"
+        <a href="{{ url_for('student_views.student_accolades_page') }}"
            {% if active_tab == 'accolades' %}class="active-tab"{% endif %}>
           Accolades
         </a>
