@@ -1,0 +1,159 @@
+{% extends "student_layout.html" %} {% block styles %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='student_history_page_style.css') }}"
+/>
+
+{% endblock %} {% block content %}
+<div class="container history-page" style="margin-top: 20px">
+  {# flash messages #} {% with messages =
+  get_flashed_messages(with_categories=true) %} {% if messages %} {% for
+  category, msg in messages %}
+  <div
+    id="flash-message"
+    class="card-panel {{ 'red lighten-4' if category == 'error' else 'green lighten-4' }}"
+  >
+    {{ msg }}
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
+  <!-- Container For All History Elements-->
+  <div class="sub-container">
+    <!--Left Side of History (The Controls for Filtering)-->
+    <div class="history-controls-section">
+      <span class="history-title">History</span>
+      <div class="input-field col s12 filters">
+        <select id="sortFilter">
+          <option value="" disabled selected>Sort by</option>
+          <option value="oldest">Oldest First</option>
+          <option value="newest">Newest First</option>
+          <option value="approved">Approved</option>
+          <option value="denied">Denied</option>
+          <option value="logged">Logged</option>
+          <option value="accolade">Accolades</option>
+        </select>
+      </div>
+      <div class="input-field col s6" style="width: 300px">
+        <input
+          placeholder="e.g RedCross Volunteering"
+          id="log-title"
+          type="text"
+          class="validate"
+        />
+        <label for="first_name">Log Title</label>
+        <div class="row">
+          <div class="col s6 left-align">
+            <button onclick="clearSearch()" class="btn grey waves-effect">
+              Clear
+            </button>
+          </div>
+          <div class="col s6 left-align">
+            <button onclick="searchLog()" class="btn green waves-effect">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Right Side of The History (The Logs for each History Object)-->
+    <div class="history-logs-section">
+      <div class="history-logs-scroll-section" id="history-scroll-section">
+        {%for log in activity_history%}
+        <div
+          class="history-log-card"
+          data-date="{{log.timestamp}}"
+          data-action="{{log.action}}"
+          data-title="{{log.title}}"
+        >
+          {% if log.action == "approved" or log.action == "denied" %}
+          <p>
+            Your request for {{log.hours}} Hours for {{log.title}} has been
+            {{log.action}} by Staff ID {{log.staff_id}}.
+          </p>
+          <p>{{log.timestamp}}</p>
+          {%elif log.action == "logged" %}
+          <p>
+            Staff ID {{log.staff_id}} has logged {{log.hours}} Hours for
+            {{log.title}} for you.
+          </p>
+          <p>{{log.timestamp}}</p>
+          {%elif log.action == "accolade"%}
+          <p>You have been awarded the Accolade '{{log.title}}'</p>
+          <p>{{log.timestamp}}</p>
+          {%endif%}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{%block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var selects = document.querySelectorAll("select");
+    M.FormSelect.init(selects);
+  });
+  document.getElementById("sortFilter").addEventListener("change", function () {
+    const filter = this.value;
+    const cards = document.querySelectorAll(".history-log-card");
+
+    cards.forEach((card) => {
+      const action = card.dataset.action;
+
+      if (
+        filter === "approved" ||
+        filter === "denied" ||
+        filter === "accolade" ||
+        filter === "logged"
+      ) {
+        if (action === filter) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      } else {
+        card.style.display = "flex";
+      }
+    });
+
+    if (filter === "oldest" || filter === "newest") {
+      const list = document.getElementById("history-scroll-section");
+      const cardsArr = Array.from(list.children);
+
+      cardsArr.sort((a, b) => {
+        const dateA = new Date(a.dataset.date);
+        const dateB = new Date(b.dataset.date);
+        return filter === "oldest" ? dateA - dateB : dateB - dateA;
+      });
+
+      cardsArr.forEach((card) => list.appendChild(card));
+    }
+  });
+  function searchLog() {
+    searchValue = document.getElementById("log-title").value;
+    const cards = document.querySelectorAll(".history-log-card");
+
+    cards.forEach((card) => {
+      console.log(`${card.dataset.title} and ${searchValue}`);
+      if (card.dataset.title === searchValue) card.style.display = "flex";
+      else card.style.display = "none";
+    });
+  }
+  function clearSearch() {
+    searchBar = document.getElementById("log-title");
+    searchBar.value = "";
+
+    sortFilter = document.getElementById("sortFilter");
+    sortFilter.value = "";
+
+    const cards = document.querySelectorAll(".history-log-card");
+
+    cards.forEach((card) => {
+      card.style.display = "flex";
+    });
+
+    const selects = document.querySelectorAll("select");
+    M.FormSelect.init(selects);
+  }
+</script>
+{%endblock%} {% endblock %}

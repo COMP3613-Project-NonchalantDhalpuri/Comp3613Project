@@ -1,0 +1,265 @@
+/* GLOBAL -------------------------------------------------------- */
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(180deg, #f6fff9 0%, #edf5f0 100%);
+  font-family: "Quicksand", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  color: #1b4332;
+  overflow-x: hidden;
+}
+
+/* HISTORY PAGE LAYOUT ---------------------------------- */
+
+.history-page {
+  max-width: 1400px;
+  margin: 70px auto 40px auto;
+  padding: 0 60px;
+  min-height: calc(100vh - 130px);
+}
+
+/* FLASH MESSAGES ------------------------- */
+
+#flash-message {
+  border-radius: 12px;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+}
+
+.card-panel.green.lighten-4 {
+  background-color: #e3f9e5 !important;
+  color: #1b4332 !important;
+}
+
+.card-panel.red.lighten-4 {
+  background-color: #ffe3e3 !important;
+  color: #842029 !important;
+}
+
+/* MAIN CONTAINER ---------------------------------- */
+
+.sub-container {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  gap: 60px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* LEFT SIDE - CONTROLS SECTION ---------------------- */
+
+.history-controls-section {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  padding: 28px;
+}
+
+.history-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1b4332;
+  margin-bottom: 24px;
+}
+
+.filters {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.input-field {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.input-field label {
+  color: #4f6f52;
+}
+
+.input-field input::placeholder {
+  color: #9aa4a4;
+}
+
+.input-field input:focus + label {
+  color: #95d5b2 !important;
+}
+
+.input-field input:focus {
+  border-bottom: 1px solid #95d5b2 !important;
+  box-shadow: 0 1px 0 0 #95d5b2 !important;
+}
+
+/* BUTTONS ------------------------------- */
+
+.btn.grey {
+  background-color: #e2f4ea;
+  color: #1b4332;
+}
+
+.btn.grey:hover {
+  background-color: #cce9d9;
+}
+
+.btn.green {
+  background-color: #95d5b2;
+  color: #ffffff;
+}
+
+.btn.green:hover {
+  background-color: #74c69d;
+}
+
+.btn {
+  border-radius: 8px;
+  text-transform: none;
+  font-weight: 500;
+  box-shadow: none;
+  padding: 0 20px;
+}
+
+/* RIGHT SIDE - LOGS SECTION ---------------------- */
+
+.history-logs-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 600px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  padding: 28px;
+  max-height: 600px;
+}
+
+.history-logs-scroll-section {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 16px;
+  padding-right: 8px;
+  max-height: 550px;
+}
+
+/* CUSTOM SCROLLBAR */
+
+.history-logs-scroll-section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history-logs-scroll-section::-webkit-scrollbar-track {
+  background: #f0faf3;
+  border-radius: 10px;
+}
+
+.history-logs-scroll-section::-webkit-scrollbar-thumb {
+  background: #a8e6cf;
+  border-radius: 10px;
+}
+
+.history-logs-scroll-section::-webkit-scrollbar-thumb:hover {
+  background: #95d5b2;
+}
+
+/* LOG CARDS -------------------------------------------- */
+
+.history-log-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f0faf3;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.history-log-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.history-log-card p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.history-log-card p:first-child {
+  color: #1b4332;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.history-log-card p:last-child {
+  color: #7b8b80;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* REMOVE NUMBER INPUT ARROWS --------------- */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* RESPONSIVE DESIGN ----------------------------- */
+
+@media (max-width: 992px) {
+  .history-page {
+    margin-top: 35px;
+    padding: 0 20px;
+  }
+
+  .sub-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .history-controls-section {
+    width: 100%;
+  }
+
+  .history-logs-section {
+    max-width: 100%;
+  }
+}
+
+/* BIG SCREENS (e.g. 24" monitor and up) ----------------------- */
+
+@media (min-width: 1600px) {
+  .history-page {
+    max-width: 90vw;
+    padding: 0 5vw;
+    margin-top: 100px;
+  }
+
+  .sub-container {
+    max-width: 1400px;
+    gap: 80px;
+  }
+
+  .history-controls-section {
+    width: 350px;
+    padding: 32px;
+  }
+
+  .history-logs-section {
+    max-width: 700px;
+    padding: 32px;
+    max-height: 700px;
+  }
+}
