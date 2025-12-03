@@ -1,5 +1,6 @@
 from App.models import Student, Staff
 from App.database import db
+from sqlalchemy.exc import IntegrityError
 
 
 def initialize_db(drop_first=True):
@@ -14,6 +15,9 @@ def initialize_db(drop_first=True):
         db.drop_all()
     db.create_all()
 
+
+    created_staff = []
+    created_students = []
     # Sample students (username, email, password)
     students_data = [
         ("alice", "alice.smith@gmail.com", "password1"),
@@ -31,15 +35,30 @@ def initialize_db(drop_first=True):
     ]
 
     for name, email, pwd in students_data:
-        s = Student(name=name, email=email, password=pwd)
-        db.session.add(s)
+        if not Student.query.filter_by(name=name).first():
+            try:
+                s = Student(name=name, email=email, password=pwd)
+                db.session.add(s)
+                db.session.commit()
+                created_students.append(name)
+            except IntegrityError:
+                db.session.rollback()
 
-
+    # Seed staff
     for name, email, pwd in staff_data:
-        st = Staff(name=name, email=email, password=pwd)
-        db.session.add(st)
+        if not Staff.query.filter_by(name=name).first():
+            try:
+                st = Staff(name=name, email=email, password=pwd)
+                db.session.add(st)
+                db.session.commit()
+                created_staff.append(name)
+            except IntegrityError:
+                db.session.rollback()
 
-    db.session.commit()
+    return {
+        "students_created": created_students,
+        "staff_created": created_staff
+    }
 
 
     
