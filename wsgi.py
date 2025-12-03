@@ -4,7 +4,7 @@ from App.database import get_migrate
 from App.main import create_app
 from App.controllers.student import *
 from App.controllers.staff import *
-from flask import jsonify
+
 
 # from App.controllers.app_controller import *
 from App.controllers import (initialize_db )
@@ -17,10 +17,7 @@ from App.controllers import (initialize_db )
 app = create_app()
 migrate = get_migrate(app)
 
-@app.route('/init')
-def init_db_route():
-    initialize_db()
-    return jsonify({"message": "db initialized!"})
+
 
 
 # This command creates and initializes the database
