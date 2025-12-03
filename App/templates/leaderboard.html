@@ -126,7 +126,7 @@
         <div class="leader-label">Accolades</div>
         <div class="leader-badges">
           {% if s.accolades %} {% for a in s.accolades %}
-          <span class="badge-icon">{{ a[0] }}</span>
+          <span class="badge-icon">{{ a[0] }}{{a[1]}}</span>
           {% endfor %} {% else %}
           <span class="no-accolades">None yet</span>
           {% endif %}

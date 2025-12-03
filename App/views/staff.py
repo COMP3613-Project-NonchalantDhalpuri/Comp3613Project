@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, flash, redirect, url_for
-from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request, jwt_required
+from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request
 from jwt import ExpiredSignatureError
 
 from App.controllers.request import get_all_requests, approve_request, process_request_denial, get_requests_by_student   
@@ -42,15 +42,11 @@ def staff_home_page():
 
         try:
             hours = float(hours_raw)
-            if hours <= 0:
+            if hours <= 0 or hours < 0.01:
                 raise ValueError
         except (TypeError, ValueError):
             flash("Hours must be a positive number.", "error")
-            return render_template(
-                'staff_home.html',
-                active_tab='home',
-                selected_student=selected_student
-            )
+            return redirect(url_for("staff_views.staff_home_page"))
 
         if not staff_id:
             flash("You must be logged in as staff to log hours.", "error")
@@ -67,7 +63,7 @@ def staff_home_page():
                 )
                 flash("Hours logged successfully.", "success")
                 selected_student = get_student_by_id(student_id)
-                return redirect(url_for("index_views.staff_home_page"))
+                return redirect(url_for("staff_views.staff_home_page"))
             except Exception as e:
                 print(e)
                 flash("Failed to log hours. Please try again.", "error")

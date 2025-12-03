@@ -1,8 +1,7 @@
-from flask import Blueprint, redirect, render_template, request, jsonify, flash, url_for
+from flask import Blueprint, redirect, render_template, request, flash, url_for
 from flask_jwt_extended import (
     get_jwt_identity,
     verify_jwt_in_request,
-    jwt_required,
     current_user
 )
 from jwt import ExpiredSignatureError
@@ -39,13 +38,11 @@ def student_home_page():
 
         try:
             hours = float(hours_raw)
-            if hours <= 0:
+            if hours <= 0 or hours < 0.01:
                 raise ValueError
         except (TypeError, ValueError):
             flash("Hours must be a positive number.", "error")
-            return render_template(
-                'student_home.html',
-            )
+            return redirect(url_for("student_views.student_home_page"))
         
         try:    
             new_request = create_request(
@@ -55,11 +52,11 @@ def student_home_page():
                 description=description
             )
             flash("Request made successfully.", "success")
-            return redirect(url_for("index_views.student_home_page"))
+            return redirect(url_for("student_views.student_home_page"))
         except Exception as e:
             print(e)
             flash("Failed to create request. Please try again.", "error")
-            return redirect(url_for("index_views.student_home_page"))
+            return redirect(url_for("student_views.student_home_page"))
     
     requests = get_requests_by_student(student_id)
     approved_requests = [req for req in requests if req.status == 'approved']

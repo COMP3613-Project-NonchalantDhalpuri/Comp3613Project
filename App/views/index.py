@@ -2,7 +2,6 @@ from flask import Blueprint, redirect, render_template, flash, url_for
 from flask_jwt_extended import (
     get_jwt_identity,
     verify_jwt_in_request,
-    jwt_required,
 )
 from jwt import ExpiredSignatureError
 

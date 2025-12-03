@@ -1,5 +1,7 @@
 from App.database import db
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+
+UTC_MINUS_4 = timezone(timedelta(hours=-4))
 
 class ActivityHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -10,7 +12,7 @@ class ActivityHistory(db.Model):
     action = db.Column(db.String(20), nullable=False, default='approved')
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable = True)
-    timestamp = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    timestamp = db.Column(db.DateTime(timezone=True), nullable = False, default=lambda: datetime.now(UTC_MINUS_4))
 
     def __init__(self, student_id, staff_id, title, hours, action='logged by staff', request_id=None, description=None):
         self.student_id = student_id

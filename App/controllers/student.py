@@ -17,18 +17,15 @@ def calculate_accolades(student_id,staff_id=None):
     student = get_student_by_id(student_id)
 
     milestones = [10, 25, 50]
-    new_accolades = []
 
     for milestone in milestones:
-        if student.hoursAccumulated >= milestone and milestone not in student.accolades:
-            title = f'{milestone} Hours Milestone'
-            new_accolades.append(title)
-            new_activity_log = ActivityHistory(student_id=student_id,staff_id=staff_id,hours=milestone,action="accolade",title=title)
+        milestone_title = f'{milestone} Hours Milestone'
+        if student.hoursAccumulated >= milestone and milestone_title not in student.accolades:
+            student.accolades.append(milestone_title)
+            new_activity_log = ActivityHistory(student_id=student_id,staff_id=staff_id,hours=milestone,action="accolade",title=milestone_title)
             db.session.add(new_activity_log)
+            db.session.add(student)
 
-    student.accolades = new_accolades
-
-    db.session.add(student)
     db.session.commit()
 
 def get_leaderboard():
@@ -41,7 +38,7 @@ def get_student_accolades(student_id):
     student = get_student_by_id(student_id)
     if not student:
         return(f"Student with id {student_id} not found.")
-    
+        
     return student.accolades
 
 

@@ -1,5 +1,5 @@
 from App.database import db
-from App.models import Staff,Student,Request
+from App.models import Request
 from App.models.commands import ApproveRequestCommand, DenyRequestCommand
 from .student import get_student_by_id, calculate_accolades
 from .staff import get_staff_by_id
