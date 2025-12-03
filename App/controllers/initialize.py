@@ -1,4 +1,4 @@
-from App.models import User, Student, Staff, Request
+from App.models import Student, Staff
 from App.database import db
 
 

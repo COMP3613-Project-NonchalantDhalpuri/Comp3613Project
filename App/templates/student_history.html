@@ -1,14 +1,11 @@
-{% extends "student_layout.html" %} {% block styles %}
-{{ super() }}
+{% extends "student_layout.html" %} {% block styles %} {{ super() }}
 
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='student_history_page_style.css') }}"
 />
 
-{% endblock %} 
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="container history-page" style="margin-top: 20px">
   {# flash messages #} {% with messages =
   get_flashed_messages(with_categories=true) %} {% if messages %} {% for
@@ -61,7 +58,9 @@
     <!--Right Side of The History (The Logs for each History Object)-->
     <div class="history-logs-section">
       <div class="history-logs-scroll-section" id="history-scroll-section">
-        {%for log in activity_history%}
+        {%if activity_history|length == 0%}
+        <p>No activity history to display.</p>
+        {%endif%} {%for log in activity_history%}
         <div
           class="history-log-card"
           data-date="{{log.timestamp}}"

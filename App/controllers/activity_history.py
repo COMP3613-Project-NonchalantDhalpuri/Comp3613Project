@@ -1,4 +1,3 @@
-from App.database import db
 from App.models.commands import LogHoursCommand
 from .student import get_student_by_id, calculate_accolades
 from .staff import get_staff_by_id

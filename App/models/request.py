@@ -1,5 +1,7 @@
 from App.database import db
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+
+UTC_MINUS_4 = timezone(timedelta(hours=-4))
 
 class Request(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,9 +11,9 @@ class Request(db.Model):
     status = db.Column(db.String(20), nullable=False, default='pending')
     title = db.Column(db.String(100), nullable = False)
     description = db.Column(db.Text, nullable = True)
-    date_created = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
-    date_updated = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp(),
-                             onupdate=db.func.current_timestamp())
+    date_created = db.Column(db.DateTime(timezone=True), nullable = False, default=lambda: datetime.now(UTC_MINUS_4))
+    date_updated = db.Column(db.DateTime(timezone=True), nullable = False, default=lambda: datetime.now(UTC_MINUS_4),
+                             onupdate=datetime.now(UTC_MINUS_4))
 
     def __init__(self, student_id, hours, title,  status='pending', staff_id = None, description = None):
         self.student_id = student_id

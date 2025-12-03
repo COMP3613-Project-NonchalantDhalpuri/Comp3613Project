@@ -26,7 +26,7 @@ class UserUnitTests(unittest.TestCase):
 
     def test_set_password(self):
         password = "passtest"
-        new_password = "passtest"
+        new_password = "passtest2"
         Testuser = User("bob", "bob@email.com", password, "user")
         Testuser.set_password(new_password)
         self.assertTrue(Testuser.check_password(new_password))
@@ -251,7 +251,7 @@ class TestRequestIntegrationTests:
         invalid_student_id = 9999  # Assuming this ID does not exist
 
         with pytest.raises(ValueError) as excinfo:
-            create_request(invalid_student_id, 100, "Saved The Tojo Clan", "Kiryu-san did not sugar coat it")
+            create_request(invalid_student_id, 100, "Saved The Tojo Clan", "I'm not gonna sugarcoat it, r1 + triangle")
         
         assert f"Student with id {invalid_student_id} not found." in str(excinfo.value)
 
