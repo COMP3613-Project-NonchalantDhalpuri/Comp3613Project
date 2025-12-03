@@ -42,20 +42,6 @@ def delete_request(request_id):
     db.session.delete(request)
     db.session.commit()
 
-def update_request(request_id, hours=None, title=None, description=None):
-    request = get_request_by_id(request_id)
-    if not request:
-        raise ValueError(f"Request with id {request_id} not found.")
-    
-    if hours is not None:
-        request.hours = hours
-    if title is not None:
-        request.title = title
-    if description is not None:
-        request.description = description
-
-    db.session.add(request)
-    db.session.commit()
 
 def approve_request(staff_id, request_id): #staff approves a student's hours request
     staff = get_staff_by_id(staff_id)
