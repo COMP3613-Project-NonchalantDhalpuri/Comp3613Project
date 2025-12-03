@@ -1,9 +1,5 @@
 <html>
   <head>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
     <!--Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -16,113 +12,236 @@
     />
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Login - Student Incentive System{% endblock %}</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+    </style>
+    <style>
+      /* GLOBAL STYLES */
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        background: linear-gradient(180deg, #f6fff9 0%, #edf5f0 100%);
+        font-family: "Quicksand", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #1b4332;
+        min-height: 100vh;
+      }
+
+      /* FLASH MESSAGES*/
+      .flash-container {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        max-width: 90%;
+      }
+
+      .flash-message {
+        background-color: #e3f9e5 !important;
+        color: #1b4332 !important;
+        border-radius: 12px;
+        padding: 16px 20px !important;
+        font-size: 0.95rem;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 10px;
+        max-width: 500px;
+      }
+
+      .flash-message.card-panel.red {
+        background-color: #ffe3e3 !important;
+        color: #842029 !important;
+      }
+
+      .close-btn {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 24px;
+        font-weight: 300;
+        color: inherit;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+      }
+
+      .close-btn:hover {
+        opacity: 1;
+      }
+
+      /* LOGIN PAGE LAYOUT */
+      .login-page-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .login-container {
+        background-color: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        padding: 40px;
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .login-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1b4332;
+        margin: 0 0 8px 0;
+        letter-spacing: -0.01em;
+      }
+
+      .login-subtitle {
+        font-size: 0.95rem;
+        color: #6c757d;
+        margin: 0;
+      }
+
+      /* TAB/ROLE BUTTONS */
+      .login-tabs {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .login-tab-btn {
+        flex: 1;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background-color: #e8f3ee;
+        color: #1b4332;
+      }
+
+      .login-tab-btn:hover {
+        background-color: #d5eae1;
+      }
+
+      .login-tab-btn.active {
+        background-color: #a8e6cf;
+        color: #1b4332;
+        box-shadow: 0 4px 10px rgba(168, 230, 207, 0.3);
+      }
+
+      /* LOGIN FORM */
+      .login-form-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-field-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-field-group label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #1b4332;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+
+      .input-field {
+        margin-bottom: 0 !important;
+      }
+
+      .form-field-group input {
+        background-color: #f8f9fa;
+        border: 1px solid #e2f4ea;
+        border-radius: 8px;
+        padding: 12px 14px !important;
+        font-size: 0.95rem;
+        color: #1b4332 !important;
+        font-family: "Quicksand", sans-serif;
+        transition: all 0.2s ease;
+      }
+
+      .form-field-group input:focus {
+        background-color: #ffffff;
+        border-color: #a8e6cf !important;
+        box-shadow: 0 0 0 3px rgba(168, 230, 207, 0.1) !important;
+      }
+
+      .form-field-group input::placeholder {
+        color: #9aa4a4;
+      }
+
+      /* SUBMIT BUTTON */
+      .login-button-group {
+        display: flex;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .login-btn {
+        flex: 1;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: "Quicksand", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .login-btn-primary {
+        background-color: #95d5b2;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(149, 213, 178, 0.2);
+      }
+
+      .login-btn-primary:hover {
+        background-color: #74c69d;
+        box-shadow: 0 6px 16px rgba(149, 213, 178, 0.3);
+      }
+
+      .login-btn-primary:active {
+        background-color: #63b59c;
+        box-shadow: 0 2px 8px rgba(149, 213, 178, 0.2);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 480px) {
+        .login-container {
+          padding: 28px 20px;
+        }
+
+        .login-title {
+          font-size: 1.5rem;
+        }
+
+        .form-field-group input {
+          padding: 10px 12px !important;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
   </head>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&display=swap");
-  </style>
-  <style>
-    body {
-      background-color: #f0f0f0;
-      font-family: "Arial", sans-serif;
-    }
-    .flash-container {
-      position: fixed;
-      align-items: center;
-      top: 50px;
-      left: 33%;
-    }
-    .flash-message {
-      width: 500px;
-      height: 70px;
-      position: relative;
-      padding-right: 40px;
-      font-size: large;
-    }
-
-    .close-btn {
-      position: absolute;
-      right: 10px;
-      top: 8px;
-      cursor: pointer;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .close-btn:hover {
-      opacity: 0.7;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      height: 500px;
-      width: 900px;
-      position: absolute;
-      top: 20%;
-      left: 22%;
-      padding: 20px;
-      border-radius: 20px;
-      background: #c6c2ff;
-      background: linear-gradient(
-        209deg,
-        rgba(198, 194, 255, 1) 0%,
-        rgba(164, 190, 224, 0.78) 52%,
-        rgba(177, 240, 252, 1) 100%
-      );
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
-        rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    }
-    .welcome-text {
-      font-size: 2.5em;
-      font-family: "Expletus Sans", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 500;
-      font-style: italic;
-      padding: 20px;
-      color: white;
-    }
-    .loginForm-container {
-      display: flex;
-      flex-direction: column;
-      background-color: rgba(0, 0, 0, 0.4);
-      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-      border-radius: 20px;
-    }
-    .login-buttons {
-      display: flex;
-      gap: 0;
-      padding: 0;
-      margin-left: 20px;
-    }
-    .change-button {
-      background-color: #6200ea;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px 20px 0px 0px;
-      margin-right: 5px;
-      cursor: pointer;
-      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    }
-    .change-button-active {
-      background-color: #3700b3;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px 20px 0px 0px;
-      margin-right: 5px;
-      cursor: pointer;
-      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    }
-    .change-button:hover {
-      background-color: #3700b3;
-    }
-    .loginForm {
-      color: white;
-    }
-  </style>
   <body>
+    <!-- Flash Messages -->
     {% with messages = get_flashed_messages() %} {% if messages %}
     <div id="flash-container" class="flash-container">
       {% for msg in messages %}
@@ -133,49 +252,59 @@
       {% endfor %}
     </div>
     {% endif %} {% endwith %}
-    <div class="container" id="content">
-      <div class="welcome-text">Welcome!</div>
-      <div class="login-buttons">
-        <div class="change-button-active" id="studentBtn">Student</div>
-        <div class="change-button" id="staffBtn">Staff</div>
-      </div>
-      <div class="loginForm-container">
+
+    <!-- Login Page -->
+    <div class="login-page-wrapper">
+      <div class="login-container">
+        <!-- Header -->
+        <div class="login-header">
+          <h1 class="login-title">Welcome</h1>
+          <p class="login-subtitle">Student Incentive System</p>
+        </div>
+
+        <!-- Role Tabs -->
+        <div class="login-tabs">
+          <button type="button" class="login-tab-btn active" id="studentBtn">
+            Student
+          </button>
+          <button type="button" class="login-tab-btn" id="staffBtn">
+            Staff
+          </button>
+        </div>
+
+        <!-- Login Form -->
         <form
           id="loginForm"
           method="POST"
           action="/login/student"
-          style="padding: 1em"
+          class="login-form-wrapper"
         >
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                placeholder="Student Name"
-                id="name"
-                name="name"
-                type="text"
-                class="validate"
-                style="color: white"
-              />
-              <label for="name"></label>
-            </div>
+          <div class="form-field-group">
+            <label for="name">Username</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Enter your username"
+              required
+            />
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input
-                placeholder="Student Password"
-                name="password"
-                id="password"
-                type="password"
-                class="validate"
-                style="color: white"
-              />
-              <label for="password"></label>
-            </div>
+
+          <div class="form-field-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              required
+            />
           </div>
-          <div class="row justify-content">
-            <div class="col s4 card-action">
-              <input type="submit" class="blue text-white btn" value="Login" />
-            </div>
+
+          <div class="login-button-group">
+            <button type="submit" class="login-btn login-btn-primary">
+              Login
+            </button>
           </div>
         </form>
       </div>
@@ -183,27 +312,30 @@
   </body>
   <script>
     const form = document.getElementById("loginForm");
-    const username = document.getElementById("name");
-    const password = document.getElementById("password");
+    const usernameInput = document.getElementById("name");
+    const passwordInput = document.getElementById("password");
     const studentBtn = document.getElementById("studentBtn");
     const staffBtn = document.getElementById("staffBtn");
 
-    document.getElementById("studentBtn").addEventListener("click", () => {
-      studentBtn.className = "change-button-active";
-      staffBtn.className = "change-button";
-      username.placeholder = "Student Name";
-      password.placeholder = "Student Password";
+    // Student login
+    studentBtn.addEventListener("click", () => {
+      studentBtn.classList.add("active");
+      staffBtn.classList.remove("active");
+      usernameInput.placeholder = "Enter your username";
+      passwordInput.placeholder = "Enter your password";
       form.action = "/login/student";
     });
 
-    document.getElementById("staffBtn").addEventListener("click", () => {
-      staffBtn.className = "change-button-active";
-      studentBtn.className = "change-button";
-      username.placeholder = "Staff Name";
-      password.placeholder = "Staff Password";
+    // Staff login
+    staffBtn.addEventListener("click", () => {
+      staffBtn.classList.add("active");
+      studentBtn.classList.remove("active");
+      usernameInput.placeholder = "Enter your username";
+      passwordInput.placeholder = "Enter your password";
       form.action = "/login/staff";
     });
 
+    // Auto-dismiss flash messages after 5 seconds
     setTimeout(() => {
       document.querySelectorAll(".flash-message").forEach((msg) => {
         msg.style.transition = "opacity 0.5s";
