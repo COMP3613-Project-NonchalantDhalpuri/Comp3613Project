@@ -1,3 +1,7 @@
+## Sample Screenshots
+
+
+---
 ## About the Student Incentive Platform
 
 This platform helps tertiary institutions track and reward student participation by capturing volunteer or co-curricular hours, validating them through staff approvals, and converting approved time into accolades and leaderboard rankings. It is implemented with Flask and exposes both a command-line interface (CLI) for administrative tasks and lightweight web views for manual review and browsing.
@@ -20,10 +24,9 @@ Intended users: administrators, staff reviewers, and students at educational ins
 | `flask init` | Creates and initializes the database |
 
 ---
-
-
 ## Tests
 
 Run unit and integration tests via the Flask CLI testing command. Example commands:
 
 - `flask test int` — or - `flask test unit` runs the integration tests or unit tests respectively.
+---
