@@ -9,7 +9,7 @@
 
 ### Staff Side
 ![Staff Home Screen](sample_screenshots/staff_home.png)
-![Staff Request Screen](sample_screenshots/staff_request.png)
+![Staff Request Screen](sample_screenshots/staff_requests.png)
 ![Staff Student Hours Screen](sample_screenshots/staff_student_hours.png)
 
 ---
