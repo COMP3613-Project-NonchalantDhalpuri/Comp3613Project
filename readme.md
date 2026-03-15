@@ -1,11 +1,16 @@
 ## Sample Screenshots
-![Login Screen](sample_screenshots/login.png)
+![Login Screen](sample_screenshots/login_page.png)
 
 ### Student Side
 ![Student Home Screen](sample_screenshots/student_home.png)
 ![Student Leaderboards Screen](sample_screenshots/student_leaderboards.png)
 ![Student Accolades Screen](sample_screenshots/student_accolades.png)
 ![Student History Screen](sample_screenshots/student_history.png)
+
+### Staff Side
+![Staff Home Screen](sample_screenshots/staff_home.png)
+![Staff Request Screen](sample_screenshots/staff_request.png)
+![Staff Student Hours Screen](sample_screenshots/staff_student_hours.png)
 
 ---
 ## About the Student Incentive Platform
